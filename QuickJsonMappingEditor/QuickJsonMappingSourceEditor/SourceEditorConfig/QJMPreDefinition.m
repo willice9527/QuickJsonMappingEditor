@@ -23,3 +23,6 @@ NSString *const Prefix_Interface = @"@interface";
 NSString *const Prefix_Implementation = @"@implementation";
 NSString *const Prefix_End = @"@end";
 NSString *const Prefix_MacroDefinition = @"#define";
+
+NSString *const KeypathCodeingEnable = @"Keypath_Coding_Enable";
+NSString *const KeypathCodeingDisable = @"Keypath_Coding_Disable";

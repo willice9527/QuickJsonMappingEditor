@@ -12,4 +12,22 @@
 
 - (NSString *)qjm_subStringWithRegular:(NSString *)regular;
 
+- (BOOL)qjm_isBlankNewLine;
+
+- (BOOL)qjm_isSingleCommentLine;
+
+- (BOOL)qjm_isMultiLinesCommentHeader;
+
+- (BOOL)qjm_isMultiLinesCommentFooter;
+
+- (NSString *)qjm_purify;
+
+- (BOOL)qjm_isCategoryInterface;
+
+- (BOOL)qjm_isCategoryImplementation;
+
+- (NSString *)qjm_classNameFromInterfaceLine;
+
+- (NSString *)qjm_classNameFromImplementationLine;
+
 @end

@@ -10,4 +10,16 @@
 
 @implementation QJMYYModelCommandHandler
 
+- (void)commondDidArrivedWithInvocation:(XCSourceEditorCommandInvocation *)invocation {
+
+}
+
+- (void)scanWithLine:(NSString *)oriLine purifiedLine:(NSString *)purifiedLine classInfo:(QJMClassInfo *)info {
+
+}
+
+- (NSArray <NSString *>*)mapMethodForSourceInfo:(QJMClassInfo *)info {
+  return nil;
+}
+
 @end

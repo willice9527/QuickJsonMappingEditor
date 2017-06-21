@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <XcodeKit/XcodeKit.h>
 
+@class QJMClassInfo;
 @protocol QJMCommandHandleProtocol <NSObject>
 
 @required //简化起见，全部设置为必须实现
@@ -15,6 +17,8 @@
 ///performCommandWithInvocation 头部调用
 - (void)commondDidArrivedWithInvocation:(XCSourceEditorCommandInvocation *)invocation;
 
-- (void)scanWithLine:(NSString *)oriLine purifiedLine:(NSString *)purifiedLine;
+- (void)scanWithLine:(NSString *)oriLine purifiedLine:(NSString *)purifiedLine classInfo:(QJMClassInfo *)info;
+
+- (NSArray <NSString *>*)mapMethodForSourceInfo:(QJMClassInfo *)info;
 
 @end

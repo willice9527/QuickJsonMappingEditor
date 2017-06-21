@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QJMCommandHandleProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,10 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) BOOL isClassProperty;
 @property (nonatomic, assign, readonly) BOOL isReadOnly;
-@property (nonatomic, assign, readonly) BOOL isSelfDefinedClass;
-@property (nonatomic, assign, readonly) BOOL isInnerSelfDefinedClass;
 @property (nonatomic, copy, readonly) NSString *typeString;
-@property (nonatomic, copy, readonly) NSString *innerTypeString;//container only{Array}
+@property (nonatomic, copy, readonly) NSString *innerTypeString;//container only{Array,set}
 @property (nonatomic, copy, readonly) NSString *propertyName;
 @property (nonatomic, copy, readonly) NSString *metaLine;
 

@@ -26,3 +26,8 @@ extern NSString *const Prefix_Interface;
 extern NSString *const Prefix_Implementation;
 extern NSString *const Prefix_End;
 extern NSString *const Prefix_MacroDefinition;
+
+#pragma mark - key path coding
+
+extern NSString *const KeypathCodeingEnable;
+extern NSString *const KeypathCodeingDisable;
