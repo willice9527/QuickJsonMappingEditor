@@ -30,4 +30,6 @@
 
 - (NSString *)qjm_classNameFromImplementationLine;
 
+- (NSString *)qjm_trimdRecursiveWithCharacterInStrings:(NSArray <NSString *>*)characterStrings;
+
 @end

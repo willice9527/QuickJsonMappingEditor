@@ -12,7 +12,7 @@ static NSString *const QJMSingleLineCommentPrefix = @"//";
 static NSString *const QJMMultiLinesCommentPrefix = @"/*";
 static NSString *const QJMMultiLinesCommentSuffix = @"*/";
 static NSString *const QJMClangAttributeMark = @"__attribute__";
-static NSString *const QJMCategoryNamePartRegular = @"\\(.*?\\)";//()中间的部分
+static NSString *const QJMCategoryNamePartRegular = @"\\(.*?\\)";//()及中间的部分
 static NSString *const QJMInterfaceClassNamePartRegular = @"(?<=@interface)\\s*\\w+\\b";// @interface 后面的第一个单词
 static NSString *const QJMImplementationClassNamePartRegular = @"(?<=@implementation)\\s*\\w+\\b";// @implementation 后面的第一个单词
 
@@ -83,11 +83,13 @@ static inline NSString *QJMTrimedLine(NSString *oriString) {
 
 - (BOOL)qjm_isCategoryInterface {
   NSString *categoryNamePart = [self qjm_subStringWithRegular:QJMCategoryNamePartRegular];
+  categoryNamePart = [categoryNamePart qjm_trimdRecursiveWithCharacterInStrings:@[ @"()"]];
   return categoryNamePart.length > 0;
 }
 
 - (BOOL)qjm_isCategoryImplementation {
   NSString *categoryNamePart = [self qjm_subStringWithRegular:QJMCategoryNamePartRegular];
+  categoryNamePart = [categoryNamePart qjm_trimdRecursiveWithCharacterInStrings:@[ @"()"]];
   return categoryNamePart.length > 0;
 }
 
@@ -97,6 +99,14 @@ static inline NSString *QJMTrimedLine(NSString *oriString) {
 
 - (NSString *)qjm_classNameFromImplementationLine {
   return [self qjm_subStringWithRegular:QJMImplementationClassNamePartRegular];
+}
+
+- (NSString *)qjm_trimdRecursiveWithCharacterInStrings:(NSArray <NSString *>*)characterStrings {
+  __block NSString *trimedString = QJMTrimedLine(self);
+  [characterStrings enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    trimedString = [trimedString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:obj]];
+  }];
+  return QJMTrimedLine(trimedString);
 }
 
 @end

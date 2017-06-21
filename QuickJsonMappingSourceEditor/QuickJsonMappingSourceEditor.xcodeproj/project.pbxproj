@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2EDE90B71EFA7D4600475F70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90B61EFA7D4600475F70 /* AppDelegate.m */; };
+		2EDE90BA1EFA7D4600475F70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90B91EFA7D4600475F70 /* main.m */; };
+		2EDE90BD1EFA7D4600475F70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90BC1EFA7D4600475F70 /* ViewController.m */; };
+		2EDE90BF1EFA7D4600475F70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EDE90BE1EFA7D4600475F70 /* Assets.xcassets */; };
+		2EDE90C21EFA7D4600475F70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EDE90C01EFA7D4600475F70 /* Main.storyboard */; };
+		2EDE90D01EFA7D9600475F70 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EDE90CF1EFA7D9600475F70 /* Cocoa.framework */; };
+		2EDE90D61EFA7D9600475F70 /* SourceEditorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90D51EFA7D9600475F70 /* SourceEditorExtension.m */; };
+		2EDE90D91EFA7D9600475F70 /* SourceEditorCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90D81EFA7D9600475F70 /* SourceEditorCommand.m */; };
+		2EDE90DD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2EDE90CD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2EDE90EC1EFA7DCD00475F70 /* QJMClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90E41EFA7DCD00475F70 /* QJMClassInfo.m */; };
+		2EDE90ED1EFA7DCD00475F70 /* QJMMantleCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90E71EFA7DCD00475F70 /* QJMMantleCommandHandler.m */; };
+		2EDE90EE1EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90E91EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m */; };
+		2EDE90EF1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90EB1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m */; };
+		2EDE90F41EFA7DD400475F70 /* MantlePreference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */; };
+		2EDE90F51EFA7DD400475F70 /* QJMPreDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */; };
+		2EDE90F91EFA7DDA00475F70 /* NSString+QJMUitility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90F81EFA7DDA00475F70 /* NSString+QJMUitility.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2EDE90DB1EFA7D9600475F70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2EDE90AA1EFA7D4600475F70 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2EDE90CC1EFA7D9600475F70;
+			remoteInfo = QuickJsonMappingExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2EDE90E11EFA7D9600475F70 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2EDE90DD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2EDE90B21EFA7D4600475F70 /* QuickJsonMappingSourceEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickJsonMappingSourceEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EDE90B51EFA7D4600475F70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2EDE90B61EFA7D4600475F70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2EDE90B91EFA7D4600475F70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2EDE90BB1EFA7D4600475F70 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2EDE90BC1EFA7D4600475F70 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2EDE90BE1EFA7D4600475F70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2EDE90C11EFA7D4600475F70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2EDE90C31EFA7D4600475F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EDE90CD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = QuickJsonMappingExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EDE90CF1EFA7D9600475F70 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		2EDE90D31EFA7D9600475F70 /* QuickJsonMappingExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickJsonMappingExtension.entitlements; sourceTree = "<group>"; };
+		2EDE90D41EFA7D9600475F70 /* SourceEditorExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceEditorExtension.h; sourceTree = "<group>"; };
+		2EDE90D51EFA7D9600475F70 /* SourceEditorExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceEditorExtension.m; sourceTree = "<group>"; };
+		2EDE90D71EFA7D9600475F70 /* SourceEditorCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceEditorCommand.h; sourceTree = "<group>"; };
+		2EDE90D81EFA7D9600475F70 /* SourceEditorCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceEditorCommand.m; sourceTree = "<group>"; };
+		2EDE90DA1EFA7D9600475F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EDE90E31EFA7DCD00475F70 /* QJMClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMClassInfo.h; sourceTree = "<group>"; };
+		2EDE90E41EFA7DCD00475F70 /* QJMClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMClassInfo.m; sourceTree = "<group>"; };
+		2EDE90E51EFA7DCD00475F70 /* QJMCommandHandleProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMCommandHandleProtocol.h; sourceTree = "<group>"; };
+		2EDE90E61EFA7DCD00475F70 /* QJMMantleCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMMantleCommandHandler.h; sourceTree = "<group>"; };
+		2EDE90E71EFA7DCD00475F70 /* QJMMantleCommandHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMMantleCommandHandler.m; sourceTree = "<group>"; };
+		2EDE90E81EFA7DCD00475F70 /* QJMPropertyTemplateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMPropertyTemplateHandler.h; sourceTree = "<group>"; };
+		2EDE90E91EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMPropertyTemplateHandler.m; sourceTree = "<group>"; };
+		2EDE90EA1EFA7DCD00475F70 /* QJMYYModelCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMYYModelCommandHandler.h; sourceTree = "<group>"; };
+		2EDE90EB1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMYYModelCommandHandler.m; sourceTree = "<group>"; };
+		2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MantlePreference.plist; sourceTree = "<group>"; };
+		2EDE90F21EFA7DD400475F70 /* QJMPreDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMPreDefinition.h; sourceTree = "<group>"; };
+		2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMPreDefinition.m; sourceTree = "<group>"; };
+		2EDE90F71EFA7DDA00475F70 /* NSString+QJMUitility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QJMUitility.h"; sourceTree = "<group>"; };
+		2EDE90F81EFA7DDA00475F70 /* NSString+QJMUitility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QJMUitility.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2EDE90AF1EFA7D4600475F70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EDE90CA1EFA7D9600475F70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EDE90D01EFA7D9600475F70 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2EDE90A91EFA7D4600475F70 = {
+			isa = PBXGroup;
+			children = (
+				2EDE90B41EFA7D4600475F70 /* QuickJsonMappingSourceEditor */,
+				2EDE90D11EFA7D9600475F70 /* QuickJsonMappingExtension */,
+				2EDE90CE1EFA7D9600475F70 /* Frameworks */,
+				2EDE90B31EFA7D4600475F70 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2EDE90B31EFA7D4600475F70 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90B21EFA7D4600475F70 /* QuickJsonMappingSourceEditor.app */,
+				2EDE90CD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2EDE90B41EFA7D4600475F70 /* QuickJsonMappingSourceEditor */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90B51EFA7D4600475F70 /* AppDelegate.h */,
+				2EDE90B61EFA7D4600475F70 /* AppDelegate.m */,
+				2EDE90BB1EFA7D4600475F70 /* ViewController.h */,
+				2EDE90BC1EFA7D4600475F70 /* ViewController.m */,
+				2EDE90BE1EFA7D4600475F70 /* Assets.xcassets */,
+				2EDE90C01EFA7D4600475F70 /* Main.storyboard */,
+				2EDE90C31EFA7D4600475F70 /* Info.plist */,
+				2EDE90B81EFA7D4600475F70 /* Supporting Files */,
+			);
+			path = QuickJsonMappingSourceEditor;
+			sourceTree = "<group>";
+		};
+		2EDE90B81EFA7D4600475F70 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90B91EFA7D4600475F70 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2EDE90CE1EFA7D9600475F70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90CF1EFA7D9600475F70 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EDE90D11EFA7D9600475F70 /* QuickJsonMappingExtension */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90D41EFA7D9600475F70 /* SourceEditorExtension.h */,
+				2EDE90D51EFA7D9600475F70 /* SourceEditorExtension.m */,
+				2EDE90D71EFA7D9600475F70 /* SourceEditorCommand.h */,
+				2EDE90D81EFA7D9600475F70 /* SourceEditorCommand.m */,
+				2EDE90DA1EFA7D9600475F70 /* Info.plist */,
+				2EDE90F61EFA7DDA00475F70 /* Utilities */,
+				2EDE90F01EFA7DD400475F70 /* SourceEditorConfig */,
+				2EDE90E21EFA7DCD00475F70 /* SourceEditorClass */,
+				2EDE90D21EFA7D9600475F70 /* Supporting Files */,
+			);
+			path = QuickJsonMappingExtension;
+			sourceTree = "<group>";
+		};
+		2EDE90D21EFA7D9600475F70 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90D31EFA7D9600475F70 /* QuickJsonMappingExtension.entitlements */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2EDE90E21EFA7DCD00475F70 /* SourceEditorClass */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90E31EFA7DCD00475F70 /* QJMClassInfo.h */,
+				2EDE90E41EFA7DCD00475F70 /* QJMClassInfo.m */,
+				2EDE90E51EFA7DCD00475F70 /* QJMCommandHandleProtocol.h */,
+				2EDE90E61EFA7DCD00475F70 /* QJMMantleCommandHandler.h */,
+				2EDE90E71EFA7DCD00475F70 /* QJMMantleCommandHandler.m */,
+				2EDE90E81EFA7DCD00475F70 /* QJMPropertyTemplateHandler.h */,
+				2EDE90E91EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m */,
+				2EDE90EA1EFA7DCD00475F70 /* QJMYYModelCommandHandler.h */,
+				2EDE90EB1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m */,
+			);
+			path = SourceEditorClass;
+			sourceTree = "<group>";
+		};
+		2EDE90F01EFA7DD400475F70 /* SourceEditorConfig */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */,
+				2EDE90F21EFA7DD400475F70 /* QJMPreDefinition.h */,
+				2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */,
+			);
+			path = SourceEditorConfig;
+			sourceTree = "<group>";
+		};
+		2EDE90F61EFA7DDA00475F70 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2EDE90F71EFA7DDA00475F70 /* NSString+QJMUitility.h */,
+				2EDE90F81EFA7DDA00475F70 /* NSString+QJMUitility.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EDE90B11EFA7D4600475F70 /* QuickJsonMappingSourceEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EDE90C61EFA7D4600475F70 /* Build configuration list for PBXNativeTarget "QuickJsonMappingSourceEditor" */;
+			buildPhases = (
+				2EDE90AE1EFA7D4600475F70 /* Sources */,
+				2EDE90AF1EFA7D4600475F70 /* Frameworks */,
+				2EDE90B01EFA7D4600475F70 /* Resources */,
+				2EDE90E11EFA7D9600475F70 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2EDE90DC1EFA7D9600475F70 /* PBXTargetDependency */,
+			);
+			name = QuickJsonMappingSourceEditor;
+			productName = QuickJsonMappingSourceEditor;
+			productReference = 2EDE90B21EFA7D4600475F70 /* QuickJsonMappingSourceEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2EDE90CC1EFA7D9600475F70 /* QuickJsonMappingExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2EDE90DE1EFA7D9600475F70 /* Build configuration list for PBXNativeTarget "QuickJsonMappingExtension" */;
+			buildPhases = (
+				2EDE90C91EFA7D9600475F70 /* Sources */,
+				2EDE90CA1EFA7D9600475F70 /* Frameworks */,
+				2EDE90CB1EFA7D9600475F70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickJsonMappingExtension;
+			productName = QuickJsonMappingExtension;
+			productReference = 2EDE90CD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex */;
+			productType = "com.apple.product-type.xcode-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2EDE90AA1EFA7D4600475F70 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = LJL;
+				TargetAttributes = {
+					2EDE90B11EFA7D4600475F70 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 5H4NG2JQ86;
+						ProvisioningStyle = Automatic;
+					};
+					2EDE90CC1EFA7D9600475F70 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 5H4NG2JQ86;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 2EDE90AD1EFA7D4600475F70 /* Build configuration list for PBXProject "QuickJsonMappingSourceEditor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2EDE90A91EFA7D4600475F70;
+			productRefGroup = 2EDE90B31EFA7D4600475F70 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EDE90B11EFA7D4600475F70 /* QuickJsonMappingSourceEditor */,
+				2EDE90CC1EFA7D9600475F70 /* QuickJsonMappingExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2EDE90B01EFA7D4600475F70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EDE90BF1EFA7D4600475F70 /* Assets.xcassets in Resources */,
+				2EDE90C21EFA7D4600475F70 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EDE90CB1EFA7D9600475F70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EDE90F41EFA7DD400475F70 /* MantlePreference.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2EDE90AE1EFA7D4600475F70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EDE90BD1EFA7D4600475F70 /* ViewController.m in Sources */,
+				2EDE90BA1EFA7D4600475F70 /* main.m in Sources */,
+				2EDE90B71EFA7D4600475F70 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2EDE90C91EFA7D9600475F70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2EDE90D61EFA7D9600475F70 /* SourceEditorExtension.m in Sources */,
+				2EDE90F91EFA7DDA00475F70 /* NSString+QJMUitility.m in Sources */,
+				2EDE90F51EFA7DD400475F70 /* QJMPreDefinition.m in Sources */,
+				2EDE90EF1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m in Sources */,
+				2EDE90D91EFA7D9600475F70 /* SourceEditorCommand.m in Sources */,
+				2EDE90ED1EFA7DCD00475F70 /* QJMMantleCommandHandler.m in Sources */,
+				2EDE90EE1EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m in Sources */,
+				2EDE90EC1EFA7DCD00475F70 /* QJMClassInfo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2EDE90DC1EFA7D9600475F70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2EDE90CC1EFA7D9600475F70 /* QuickJsonMappingExtension */;
+			targetProxy = 2EDE90DB1EFA7D9600475F70 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2EDE90C01EFA7D4600475F70 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2EDE90C11EFA7D4600475F70 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2EDE90C41EFA7D4600475F70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2EDE90C51EFA7D4600475F70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2EDE90C71EFA7D4600475F70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5H4NG2JQ86;
+				INFOPLIST_FILE = QuickJsonMappingSourceEditor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jinlin.liu.QuickJsonMappingSourceEditor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		2EDE90C81EFA7D4600475F70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5H4NG2JQ86;
+				INFOPLIST_FILE = QuickJsonMappingSourceEditor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jinlin.liu.QuickJsonMappingSourceEditor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+		2EDE90DF1EFA7D9600475F70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = QuickJsonMappingExtension/QuickJsonMappingExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5H4NG2JQ86;
+				INFOPLIST_FILE = QuickJsonMappingExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = jinlin.liu.QuickJsonMappingSourceEditor.QuickJsonMappingExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2EDE90E01EFA7D9600475F70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = QuickJsonMappingExtension/QuickJsonMappingExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5H4NG2JQ86;
+				INFOPLIST_FILE = QuickJsonMappingExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = jinlin.liu.QuickJsonMappingSourceEditor.QuickJsonMappingExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2EDE90AD1EFA7D4600475F70 /* Build configuration list for PBXProject "QuickJsonMappingSourceEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EDE90C41EFA7D4600475F70 /* Debug */,
+				2EDE90C51EFA7D4600475F70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2EDE90C61EFA7D4600475F70 /* Build configuration list for PBXNativeTarget "QuickJsonMappingSourceEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EDE90C71EFA7D4600475F70 /* Debug */,
+				2EDE90C81EFA7D4600475F70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2EDE90DE1EFA7D9600475F70 /* Build configuration list for PBXNativeTarget "QuickJsonMappingExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2EDE90DF1EFA7D9600475F70 /* Debug */,
+				2EDE90E01EFA7D9600475F70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2EDE90AA1EFA7D4600475F70 /* Project object */;
+}

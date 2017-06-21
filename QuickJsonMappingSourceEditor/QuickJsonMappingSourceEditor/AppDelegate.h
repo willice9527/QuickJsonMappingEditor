@@ -1,13 +1,15 @@
 //
-//  SourceEditorExtension.h
+//  AppDelegate.h
 //  QuickJsonMappingSourceEditor
 //
 //  Created by 刘金林 on 2017/6/21.
 //  Copyright © 2017年 LJL. All rights reserved.
 //
 
-#import <XcodeKit/XcodeKit.h>
+#import <Cocoa/Cocoa.h>
 
-@interface SourceEditorExtension : NSObject <XCSourceEditorExtension>
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+
 
 @end
+
