@@ -40,6 +40,9 @@
 }
 
 - (BOOL)isSelfDefinedClass:(NSString *)className {
+  if (!className) {
+    return NO;
+  }
   for (NSString *regular in self.selfDefinedClassRegulars) {
     NSRange range = [className rangeOfString:regular options:NSRegularExpressionSearch];
     if (range.location != NSNotFound && range.length == className.length) {
