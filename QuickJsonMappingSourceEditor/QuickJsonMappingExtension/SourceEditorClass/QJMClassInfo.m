@@ -59,7 +59,7 @@ static NSString *const QJMPropertyNameForTransformerRegular = @"\\b\\w+(?=JSONTr
 
 @implementation QJMClassInfo
 
-- (NSMutableArray *)propertyAttributes {
+- (NSMutableArray *)propertyInfos {
   if (!_propertyInfos) {
     _propertyInfos = [NSMutableArray array];
   }
@@ -76,7 +76,7 @@ static NSString *const QJMPropertyNameForTransformerRegular = @"\\b\\w+(?=JSONTr
 - (void)tagTransformerForMetaString:(NSString *)metaString {
   NSString *propertyName = [metaString qjm_subStringWithRegular:QJMPropertyNameForTransformerRegular];
   if (propertyName) {
-    if ([[self.propertyAttributes valueForKeyPath:@"@distinctUnionOfObjects.propertyName"] containsObject:propertyName]) {
+    if ([[self.propertyInfos valueForKeyPath:@"@distinctUnionOfObjects.propertyName"] containsObject:propertyName]) {
       [self.transformerAvailablePropertyArray addObject:propertyName];
     }
   }
