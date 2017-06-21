@@ -35,11 +35,13 @@ static NSString *const QJMPropertyNameForTransformerRegular = @"\\b\\w+(?=JSONTr
   if (self) {
     _isReadOnly = NO;
     _isClassProperty = NO;
+    _isPrimitiveType = NO;
     _metaLine = [metaString copy];
     NSString *attrString = [metaString qjm_subStringWithRegular:QJMPropertyAttributeRegular];
     if (attrString) {
       _isReadOnly = [attrString containsString:@"readonly"];
       _isClassProperty = [attrString containsString:@"class"];
+      _isPrimitiveType = [attrString containsString:@"assign"];
       _typeString = [metaString qjm_subStringWithRegular:QJMPropertyTypeWithAttrRegular];
     } else {
       _typeString = [metaString qjm_subStringWithRegular:QJMPropertyTypeNoAttrRegular];

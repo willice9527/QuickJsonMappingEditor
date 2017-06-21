@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QJMPropertyInfo : NSObject
 
+@property (nonatomic, assign, readonly) BOOL isPrimitiveType;
 @property (nonatomic, assign, readonly) BOOL isClassProperty;
 @property (nonatomic, assign, readonly) BOOL isReadOnly;
 @property (nonatomic, copy, readonly) NSString *typeString;

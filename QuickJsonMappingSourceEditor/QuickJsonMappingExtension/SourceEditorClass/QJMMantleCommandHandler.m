@@ -147,9 +147,9 @@
   }
   NSMutableArray <QJMPropertyInfo *>*customTransformerProp = [NSMutableArray array];
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    if ([self isSelfDefinedClass:obj.typeString] ||
-        [self isSelfDefinedClass:obj.innerTypeString] ||
-        [self defaultTransformerNameForClass:obj.typeString]) {
+    if (!obj.isPrimitiveType && ([self isSelfDefinedClass:obj.typeString] ||
+                                 [self isSelfDefinedClass:obj.innerTypeString] ||
+                                 [self defaultTransformerNameForClass:obj.typeString])) {
       if (![info.transformerAvailablePropertyArray containsObject:obj.propertyName]) {
         [customTransformerProp addObject:obj];
       }
