@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E4502851EFBA43A00ABC433 /* QJMCommandHandleError.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4502841EFBA43A00ABC433 /* QJMCommandHandleError.m */; };
 		2EDE90B71EFA7D4600475F70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90B61EFA7D4600475F70 /* AppDelegate.m */; };
 		2EDE90BA1EFA7D4600475F70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90B91EFA7D4600475F70 /* main.m */; };
 		2EDE90BD1EFA7D4600475F70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90BC1EFA7D4600475F70 /* ViewController.m */; };
@@ -50,6 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E4502831EFBA43A00ABC433 /* QJMCommandHandleError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMCommandHandleError.h; sourceTree = "<group>"; };
+		2E4502841EFBA43A00ABC433 /* QJMCommandHandleError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMCommandHandleError.m; sourceTree = "<group>"; };
 		2EDE90B21EFA7D4600475F70 /* QuickJsonMappingSourceEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickJsonMappingSourceEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EDE90B51EFA7D4600475F70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2EDE90B61EFA7D4600475F70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */,
 				2EDE90F21EFA7DD400475F70 /* QJMPreDefinition.h */,
 				2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */,
+				2E4502831EFBA43A00ABC433 /* QJMCommandHandleError.h */,
+				2E4502841EFBA43A00ABC433 /* QJMCommandHandleError.m */,
 			);
 			path = SourceEditorConfig;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				2EDE90F51EFA7DD400475F70 /* QJMPreDefinition.m in Sources */,
 				2EDE90EF1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m in Sources */,
 				2EDE90D91EFA7D9600475F70 /* SourceEditorCommand.m in Sources */,
+				2E4502851EFBA43A00ABC433 /* QJMCommandHandleError.m in Sources */,
 				2EDE90ED1EFA7DCD00475F70 /* QJMMantleCommandHandler.m in Sources */,
 				2EDE90EE1EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m in Sources */,
 				2EDE90EC1EFA7DCD00475F70 /* QJMClassInfo.m in Sources */,
@@ -528,6 +534,7 @@
 				2EDE90C81EFA7D4600475F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2EDE90DE1EFA7D9600475F70 /* Build configuration list for PBXNativeTarget "QuickJsonMappingExtension" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +543,7 @@
 				2EDE90E01EFA7D9600475F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

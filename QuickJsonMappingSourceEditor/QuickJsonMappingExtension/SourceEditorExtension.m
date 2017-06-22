@@ -33,7 +33,16 @@
   NSDictionary *yymodelCommand = @{ XCSourceEditorCommandNameKey : QJMYYModelKeyName,
                                     XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
                                     XCSourceEditorCommandIdentifierKey : QJMYYModelIdentifier,};
-  return @[ propertyTemplate, mantleCommand, yymodelCommand ];
+  
+  NSDictionary *jsonmodelCommand = @{ XCSourceEditorCommandNameKey : QJMJsonModelKeyName,
+                                    XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
+                                    XCSourceEditorCommandIdentifierKey : QJMJsonModelIdentifier,};
+  
+  NSDictionary *objectmapperCommand = @{ XCSourceEditorCommandNameKey : QJMObjectMapperKeyName,
+                                    XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
+                                    XCSourceEditorCommandIdentifierKey : QJMObjectMapperIdentifier,};
+  
+  return @[ propertyTemplate, mantleCommand, yymodelCommand, jsonmodelCommand, objectmapperCommand ];
 }
 
 @end

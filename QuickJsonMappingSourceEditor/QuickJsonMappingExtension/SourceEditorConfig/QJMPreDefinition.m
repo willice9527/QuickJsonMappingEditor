@@ -17,6 +17,12 @@ NSString *const QJMMantleKeyName = @"Mantle editor";
 NSString *const QJMYYModelIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.yymodel";
 NSString *const QJMYYModelKeyName = @"YYModel editor";
 
+NSString *const QJMJsonModelIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.jsonmodel";
+NSString *const QJMJsonModelKeyName = @"JsonModel editor";
+
+NSString *const QJMObjectMapperIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.objectmapper";
+NSString *const QJMObjectMapperKeyName = @"ObjectMapper editor";
+
 ///
 NSString *const Prefix_Property = @"@property";
 NSString *const Prefix_Interface = @"@interface";

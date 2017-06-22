@@ -14,6 +14,7 @@
 #import "QJMPropertyTemplateHandler.h"
 #import "QJMClassInfo.h"
 #import "NSString+QJMUitility.h"
+#import "QJMCommandHandleError.h"
 
 @interface SourceEditorCommand ()
 
