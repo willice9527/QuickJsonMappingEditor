@@ -10,16 +10,12 @@
 
 @implementation QJMCommandHandleError
 
-+ (NSError *)sourceFileTypeIMPError {
-  return [self errorWithUserTip:@"Please use it in header file."];
++ (NSError *)sourceFileTypeError {
+  return [self errorWithUserTip:@"Please use it in Objective-c header or Swift source file."];
 }
 
-+ (NSError *)sourceFileTypeOCError {
-  return [self errorWithUserTip:@"Please use it in Objective-C header file."];
-}
-
-+ (NSError *)sourceFileTypeSwiftError {
-  return [self errorWithUserTip:@"Please use it in swift file."];
++ (NSError *)sourceCommandTypeError {
+  return [self errorWithUserTip:@"Please check if the source edit command match the language"];
 }
 
 + (NSError *)sourceFileContentNoPropertyError {

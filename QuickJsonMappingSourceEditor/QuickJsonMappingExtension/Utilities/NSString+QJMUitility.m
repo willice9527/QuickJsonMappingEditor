@@ -15,6 +15,7 @@ static NSString *const QJMClangAttributeMark = @"__attribute__";
 static NSString *const QJMCategoryNamePartRegular = @"\\(.*?\\)";//()及中间的部分
 static NSString *const QJMInterfaceClassNamePartRegular = @"(?<=@interface)\\s*\\w+\\b";// @interface 后面的第一个单词
 static NSString *const QJMImplementationClassNamePartRegular = @"(?<=@implementation)\\s*\\w+\\b";// @implementation 后面的第一个单词
+static NSString *const QJMInterfaceInheritClassRegular = @"(?<=:)\\s*\\w+\\b";// : 后面的第一个单词
 
 static NSCharacterSet *QJMSpaceAndNewLineSet = nil;
 
@@ -107,6 +108,10 @@ static inline NSString *QJMTrimedLine(NSString *oriString) {
     trimedString = [trimedString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:obj]];
   }];
   return QJMTrimedLine(trimedString);
+}
+
+- (BOOL)qjm_isModelDeclareInterfaceLine {
+  return [self qjm_subStringWithRegular:QJMInterfaceInheritClassRegular].length > 0;
 }
 
 @end

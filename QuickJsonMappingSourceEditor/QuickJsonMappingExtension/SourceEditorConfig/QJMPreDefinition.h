@@ -37,3 +37,17 @@ extern NSString *const Prefix_MacroDefinition;
 
 extern NSString *const KeypathCodeingEnable;
 extern NSString *const KeypathCodeingDisable;
+
+#pragma mark - support source file type
+
+extern NSString *const QJMSupportFileTypeOCHeader;
+extern NSString *const QJMSupportFileTypeSwiftSource;
+
+@interface QJMPreDefinition : NSObject
+
+@property (nonatomic, copy, class, readonly) NSArray <NSString *>*supportedFileTypes;
+@property (nonatomic, copy, class, readonly) NSArray <NSString *>*swiftSupportedCommands;
+@property (nonatomic, copy, class, readonly) NSArray <NSString *>*OCSupportedCommands;
+
+@end
+

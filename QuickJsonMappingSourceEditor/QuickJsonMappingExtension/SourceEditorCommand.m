@@ -19,6 +19,7 @@
 @interface SourceEditorCommand ()
 
 @property (nonatomic, strong) id<QJMCommandHandleProtocol> commandHandler;
+@property (nonatomic, assign) BOOL isSwiftCode;
 
 @end
 
@@ -29,17 +30,28 @@
 #ifdef DEBUG
   NSLog(@"all lines=%@,all buffer=%@", invocation.buffer.lines, invocation.buffer.completeBuffer);
 #endif
-  [self setupHandlerIfNeededWithIdentifier:invocation.commandIdentifier];
+  NSError *commandHandleError = nil;
+  [self setupHandlerIfNeededWithInvocation:invocation error:&commandHandleError];
+  if (commandHandleError) {
+    completionHandler(commandHandleError);
+    return;
+  }
+  
   [self.commandHandler commondDidArrivedWithInvocation:invocation];
-  NSArray <QJMClassInfo *>*infoArray = [self analyzeSourceTextBuffer:invocation.buffer];
-  [self generateMappingCodeWithSourceEditInfoArray:infoArray toBuffer:invocation.buffer];
-  completionHandler(nil);
+  
+  NSArray <QJMClassInfo *>*infoArray = [self analyzeSourceTextBuffer:invocation.buffer error:&commandHandleError];
+  if (commandHandleError) {
+    completionHandler(commandHandleError);
+    return;
+  }
+  
+  [self generateMappingCodeWithSourceEditInfoArray:infoArray toBuffer:invocation.buffer error:&commandHandleError];
+  completionHandler(commandHandleError);
 }
 
-- (NSArray <QJMClassInfo *>*)analyzeSourceTextBuffer:(XCSourceTextBuffer *)buffer {
+- (NSArray <QJMClassInfo *>*)analyzeSourceTextBuffer:(XCSourceTextBuffer *)buffer error:(NSError **)error {
   NSMutableArray <QJMClassInfo *>*infoArray = [NSMutableArray array];
   __block QJMClassInfo *currentinfo = nil;
-  __block NSUInteger impIndex = 0;
   __block BOOL inComment = NO;
   [buffer.lines enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if ([obj qjm_isBlankNewLine] || [obj qjm_isSingleCommentLine]) {
@@ -57,31 +69,21 @@
       return ;
     }
     NSString *currentStringLine = [obj qjm_purify];
-    if ([currentStringLine hasPrefix:Prefix_Interface]) {
-      currentinfo = nil;
-      if (![currentStringLine qjm_isCategoryInterface]) {
-        QJMClassInfo *info = [QJMClassInfo new];
-        info.modelClassName = [currentStringLine qjm_classNameFromInterfaceLine];
-        [infoArray addObject:info];
-      }
+    if ([currentStringLine hasPrefix:Prefix_Interface] && [currentStringLine qjm_isModelDeclareInterfaceLine]) {
+      QJMClassInfo *info = [QJMClassInfo new];
+      info.modelClassName = [currentStringLine qjm_classNameFromInterfaceLine];
+      [infoArray addObject:info];
+      currentinfo = info;
     } else if ([currentStringLine hasPrefix:Prefix_Property]) {
       ///@property (nonatomic, copy, readwrite) NSString *aProperty;
-      QJMPropertyInfo *propertyInfo = [[QJMPropertyInfo alloc] initWithAttributeMetaStringLine:currentStringLine];
-      [[infoArray lastObject].propertyInfos addObject:propertyInfo];
-    } else if ([currentStringLine hasPrefix:Prefix_Implementation]) {
-      ///@implementation Model
-      currentinfo = nil;
-      NSString *impClassName = [currentStringLine qjm_classNameFromImplementationLine];
-      [infoArray enumerateObjectsUsingBlock:^(QJMClassInfo * _Nonnull innerobj, NSUInteger innerdx, BOOL * _Nonnull innterstop) {
-        if ([innerobj.modelClassName isEqualToString:impClassName]) {
-          currentinfo = innerobj;
-          currentinfo.impIndex = impIndex;
-          impIndex++;
-        }
-      }];
+      if (currentinfo) {
+        QJMPropertyInfo *propertyInfo = [[QJMPropertyInfo alloc] initWithAttributeMetaStringLine:currentStringLine];
+        [currentinfo.propertyInfos addObject:propertyInfo];
+      }
     } else if ([currentStringLine hasPrefix:Prefix_End]) {
       if (currentinfo) {
-        currentinfo.impEndLine = idx;
+        currentinfo.interfaceEndLine = idx + 1;
+        currentinfo = nil;
       }
     }
     [self.commandHandler scanWithLine:obj purifiedLine:currentStringLine classInfo:currentinfo];
@@ -95,12 +97,13 @@
 }
 
 - (void)generateMappingCodeWithSourceEditInfoArray:(NSArray <QJMClassInfo *>*)infoArray
-                                          toBuffer:(XCSourceTextBuffer *)buffer {
+                                          toBuffer:(XCSourceTextBuffer *)buffer
+                                             error:(NSError **)error {
   NSUInteger newLinesOffset = 0;
   for (QJMClassInfo *info in infoArray) {
     NSArray <NSString *>* jsonMapMethodLines = [self.commandHandler mapMethodForSourceInfo:info];
     [jsonMapMethodLines enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-      NSUInteger index = info.impEndLine + newLinesOffset;
+      NSUInteger index = info.interfaceEndLine + newLinesOffset;
       [buffer.lines insertObject:obj atIndex:index];
     }];
     info.lineOffset = jsonMapMethodLines.count;
@@ -108,7 +111,26 @@
   }
 }
 
-- (void)setupHandlerIfNeededWithIdentifier:(NSString *)identifier {
+- (void)setupHandlerIfNeededWithInvocation:(XCSourceEditorCommandInvocation *)invocation error:(NSError **)error {
+  NSString *contentUTI = invocation.buffer.contentUTI;
+  if (![QJMPreDefinition.supportedFileTypes containsObject:contentUTI]) {
+    *error = [QJMCommandHandleError sourceFileTypeError];
+    return;
+  }
+  NSString *identifier = invocation.commandIdentifier;
+  if ([contentUTI isEqualToString:QJMSupportFileTypeSwiftSource]) {
+    if (![QJMPreDefinition.swiftSupportedCommands containsObject:identifier]) {
+      *error = [QJMCommandHandleError sourceCommandTypeError];
+      return;
+    }
+    self.isSwiftCode = YES;
+  } else {
+    if (![QJMPreDefinition.OCSupportedCommands containsObject:identifier]) {
+      *error = [QJMCommandHandleError sourceCommandTypeError];
+      return;
+    }
+    self.isSwiftCode = NO;
+  }
   Class handlerClass = nil;
   if ([QJMMantleIdentifier isEqualToString:identifier]) {
     handlerClass = [QJMMantleCommandHandler class];
@@ -117,6 +139,7 @@
   } else if ([QJMTemplateIdentifier isEqualToString:identifier]) {
     handlerClass = [QJMPropertyTemplateHandler class];
   }
+  //jsonmodel /object mapper
   NSParameterAssert(handlerClass);
   if (handlerClass && !self.commandHandler) {
     self.commandHandler = [handlerClass new];

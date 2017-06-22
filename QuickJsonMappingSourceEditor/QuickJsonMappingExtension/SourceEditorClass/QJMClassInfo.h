@@ -29,17 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///meta info
 @property (nonatomic, copy) NSString *modelClassName;
-@property (nonatomic, assign) NSUInteger impEndLine;
+@property (nonatomic, assign) NSUInteger interfaceEndLine;
 @property (nonatomic, copy) NSMutableArray <QJMPropertyInfo *>*propertyInfos;
 
 ///reposition entry point
 @property (nonatomic, assign) NSUInteger lineOffset;
-@property (nonatomic, assign) BOOL jsonKeyPathMapAvailable;
-@property (nonatomic, copy) NSMutableArray <NSString *>*transformerAvailablePropertyArray;
-@property (nonatomic, assign) BOOL transformerCollectionAvailable;
 @property (nonatomic, assign) NSUInteger impIndex;
-
-- (void)tagTransformerForMetaString:(NSString *)metaString;
 
 @end
 

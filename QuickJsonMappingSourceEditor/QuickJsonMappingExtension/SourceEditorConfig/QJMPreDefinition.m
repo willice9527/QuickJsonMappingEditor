@@ -12,16 +12,16 @@ NSString *const QJMTemplateIdentifier = @"jinlin.liu.QuickJsonMappingSourceEdito
 NSString *const QJMTemplateKeyName = @"Property Template";
 
 NSString *const QJMMantleIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.mantle";
-NSString *const QJMMantleKeyName = @"Mantle editor";
+NSString *const QJMMantleKeyName = @"Mantle(OC)";
 
 NSString *const QJMYYModelIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.yymodel";
-NSString *const QJMYYModelKeyName = @"YYModel editor";
+NSString *const QJMYYModelKeyName = @"YYModel(OC)";
 
 NSString *const QJMJsonModelIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.jsonmodel";
-NSString *const QJMJsonModelKeyName = @"JsonModel editor";
+NSString *const QJMJsonModelKeyName = @"JsonModel(OC)";
 
 NSString *const QJMObjectMapperIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.objectmapper";
-NSString *const QJMObjectMapperKeyName = @"ObjectMapper editor";
+NSString *const QJMObjectMapperKeyName = @"ObjectMapper(Swift)";
 
 ///
 NSString *const Prefix_Property = @"@property";
@@ -32,3 +32,22 @@ NSString *const Prefix_MacroDefinition = @"#define";
 
 NSString *const KeypathCodeingEnable = @"Keypath_Coding_Enable";
 NSString *const KeypathCodeingDisable = @"Keypath_Coding_Disable";
+
+NSString *const QJMSupportFileTypeOCHeader = @"public.c-header";
+NSString *const QJMSupportFileTypeSwiftSource = @"public.swift-source";
+
+@implementation QJMPreDefinition
+
++ (NSArray *)supportedFileTypes {
+  return @[ QJMSupportFileTypeOCHeader, QJMSupportFileTypeSwiftSource ];
+}
+
++ (NSArray *)swiftSupportedCommands {
+  return @[ QJMTemplateIdentifier, QJMObjectMapperIdentifier ];
+}
+
++ (NSArray *)OCSupportedCommands {
+  return @[ QJMTemplateIdentifier, QJMMantleIdentifier, QJMYYModelIdentifier, QJMJsonModelIdentifier ];
+}
+
+@end

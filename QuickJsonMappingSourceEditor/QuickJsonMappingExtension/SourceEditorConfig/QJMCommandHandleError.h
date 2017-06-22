@@ -10,9 +10,8 @@
 
 @interface QJMCommandHandleError : NSObject
 
-+ (NSError *)sourceFileTypeIMPError;
-+ (NSError *)sourceFileTypeOCError;
-+ (NSError *)sourceFileTypeSwiftError;
++ (NSError *)sourceFileTypeError;
++ (NSError *)sourceCommandTypeError;
 + (NSError *)sourceFileContentNoPropertyError;
 + (NSError *)sourceFileContentStructureError;
 

@@ -32,4 +32,6 @@
 
 - (NSString *)qjm_trimdRecursiveWithCharacterInStrings:(NSArray <NSString *>*)characterStrings;
 
+- (BOOL)qjm_isModelDeclareInterfaceLine;
+
 @end

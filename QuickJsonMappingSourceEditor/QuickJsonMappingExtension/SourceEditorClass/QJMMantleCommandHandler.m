@@ -70,19 +70,6 @@
   if ([purifiedLine localizedCaseInsensitiveContainsString:KeypathCodeingDisable]) {
     self.enableKPCCurrentPage = NO;
   }
-  if (!info) {
-    return;
-  }
-  if (![purifiedLine hasPrefix:@"+"]) {
-    return;
-  }
-  if ([purifiedLine containsString:@"JSONKeyPathsByPropertyKey"]) {
-    info.jsonKeyPathMapAvailable = YES;
-  } else if ([purifiedLine containsString:@"JSONTransformerForKey"]) {
-    info.transformerCollectionAvailable = YES;
-  } else if ([purifiedLine containsString:@"JSONTransformer"]) {
-    [info tagTransformerForMetaString:purifiedLine];
-  }
 }
 
 - (NSArray <NSString *>*)mapMethodForSourceInfo:(QJMClassInfo *)info {
@@ -104,6 +91,10 @@
     [jsonMapMethods addObject:@"\n"];
     [jsonMapMethods addObjectsFromArray:transformerMethods];
   }
+  if (jsonMapMethods.count) {
+    [jsonMapMethods insertObject:@"/*\t copy start ---\n" atIndex:0];
+    [jsonMapMethods addObject:@"  \tcopy end --- */\n"];
+  }
   return jsonMapMethods;
 }
 
@@ -111,9 +102,6 @@
 
 - (NSArray <NSString *>*)keypathForSourceInfo:(QJMClassInfo *)info {
   NSMutableArray <NSString *>* jsonMapMethods = [NSMutableArray array];
-  if (info.jsonKeyPathMapAvailable) {
-    return jsonMapMethods;
-  }
   
   [jsonMapMethods addObject:@"+ (NSDictionary *)JSONKeyPathsByPropertyKey {\n"];
   if (self.enableKPCCurrentPage) {
@@ -142,17 +130,12 @@
 
 - (NSArray <NSString *>*)customerTransformerForSourceInfo:(QJMClassInfo *)info {
   NSMutableArray <NSString *>* customerTransformerMapMethods = [NSMutableArray array];
-  if (info.transformerCollectionAvailable) {
-    return customerTransformerMapMethods;
-  }
   NSMutableArray <QJMPropertyInfo *>*customTransformerProp = [NSMutableArray array];
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if (!obj.isPrimitiveType && ([self isSelfDefinedClass:obj.typeString] ||
                                  [self isSelfDefinedClass:obj.innerTypeString] ||
                                  [self defaultTransformerNameForClass:obj.typeString])) {
-      if (![info.transformerAvailablePropertyArray containsObject:obj.propertyName]) {
-        [customTransformerProp addObject:obj];
-      }
+      [customTransformerProp addObject:obj];
     }
   }];
   if (!customTransformerProp.count) {
