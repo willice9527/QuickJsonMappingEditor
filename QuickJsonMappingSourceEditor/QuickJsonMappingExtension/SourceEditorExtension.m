@@ -22,10 +22,6 @@
 
 - (NSArray <NSDictionary <XCSourceEditorCommandDefinitionKey, id> *> *)commandDefinitions
 {
-  NSDictionary *propertyTemplate = @{ XCSourceEditorCommandNameKey : QJMTemplateKeyName,
-                                      XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
-                                      XCSourceEditorCommandIdentifierKey : QJMTemplateIdentifier,};
-  
   NSDictionary *mantleCommand = @{ XCSourceEditorCommandNameKey : QJMMantleKeyName,
                                    XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
                                    XCSourceEditorCommandIdentifierKey : QJMMantleIdentifier,};
@@ -42,7 +38,7 @@
                                     XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
                                     XCSourceEditorCommandIdentifierKey : QJMObjectMapperIdentifier,};
   
-  return @[ propertyTemplate, mantleCommand, yymodelCommand, jsonmodelCommand, objectmapperCommand ];
+  return @[ mantleCommand, yymodelCommand, jsonmodelCommand, objectmapperCommand ];
 }
 
 @end

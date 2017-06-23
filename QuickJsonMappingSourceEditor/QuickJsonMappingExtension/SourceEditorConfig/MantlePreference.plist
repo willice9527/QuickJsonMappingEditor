@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>EXTKeyPathCoding</key>
-	<true/>
+	<false/>
 	<key>KeyPathPrefixTransformer</key>
-	<true/>
+	<false/>
 	<key>SelfDefinedClassRegular</key>
 	<array>
 		<string>^NVM\w+$</string>

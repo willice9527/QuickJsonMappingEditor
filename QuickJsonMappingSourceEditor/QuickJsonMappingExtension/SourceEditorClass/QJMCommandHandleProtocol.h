@@ -21,4 +21,8 @@
 
 - (NSArray <NSString *>*)mapMethodForSourceInfo:(QJMClassInfo *)info;
 
+- (NSString *)beginMarkStringOfGeneratedCode;
+
+- (NSString *)endMarkStringOfGeneratedCode;
+
 @end

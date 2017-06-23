@@ -74,6 +74,9 @@
 
 - (NSArray <NSString *>*)mapMethodForSourceInfo:(QJMClassInfo *)info {
   NSMutableArray <NSString *>* jsonMapMethods = [NSMutableArray array];
+  if (!info.propertyInfos.count) {
+    return jsonMapMethods;
+  }
   NSArray *keypathMethods = [self keypathForSourceInfo:info];
   NSArray *transformerMethods = [self customerTransformerForSourceInfo:info];
   if (keypathMethods.count) {
@@ -92,8 +95,8 @@
     [jsonMapMethods addObjectsFromArray:transformerMethods];
   }
   if (jsonMapMethods.count) {
-    [jsonMapMethods insertObject:@"/*\t copy start ---\n" atIndex:0];
-    [jsonMapMethods addObject:@"  \tcopy end --- */\n"];
+    [jsonMapMethods insertObject:[self beginMarkStringOfGeneratedCode] atIndex:0];
+    [jsonMapMethods addObject:[self endMarkStringOfGeneratedCode]];
   }
   return jsonMapMethods;
 }
@@ -190,6 +193,14 @@
   [methodLines addObject:@"}\n"];
   [methodLines addObject:@"\n"];
   return methodLines;
+}
+
+- (NSString *)beginMarkStringOfGeneratedCode {
+  return @"/*\t\tmantle map method copy begin\t\t\n";
+}
+
+- (NSString *)endMarkStringOfGeneratedCode {
+  return @"\t\tmantle map method copy end\t\t*/\n";
 }
 
 @end

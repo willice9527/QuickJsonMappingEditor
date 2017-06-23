@@ -8,9 +8,6 @@
 
 #import "QJMPreDefinition.h"
 
-NSString *const QJMTemplateIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.template";
-NSString *const QJMTemplateKeyName = @"Property Template";
-
 NSString *const QJMMantleIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.mantle";
 NSString *const QJMMantleKeyName = @"Mantle(OC)";
 
@@ -43,11 +40,11 @@ NSString *const QJMSupportFileTypeSwiftSource = @"public.swift-source";
 }
 
 + (NSArray *)swiftSupportedCommands {
-  return @[ QJMTemplateIdentifier, QJMObjectMapperIdentifier ];
+  return @[ QJMObjectMapperIdentifier ];
 }
 
 + (NSArray *)OCSupportedCommands {
-  return @[ QJMTemplateIdentifier, QJMMantleIdentifier, QJMYYModelIdentifier, QJMJsonModelIdentifier ];
+  return @[ QJMMantleIdentifier, QJMYYModelIdentifier, QJMJsonModelIdentifier ];
 }
 
 @end

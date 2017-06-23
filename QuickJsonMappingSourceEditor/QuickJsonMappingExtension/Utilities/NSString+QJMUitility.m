@@ -7,6 +7,7 @@
 //
 
 #import "NSString+QJMUitility.h"
+#import "NSArray+QJMUtility.h"
 
 static NSString *const QJMSingleLineCommentPrefix = @"//";
 static NSString *const QJMMultiLinesCommentPrefix = @"/*";
@@ -112,6 +113,35 @@ static inline NSString *QJMTrimedLine(NSString *oriString) {
 
 - (BOOL)qjm_isModelDeclareInterfaceLine {
   return [self qjm_subStringWithRegular:QJMInterfaceInheritClassRegular].length > 0;
+}
+
+- (BOOL)qjm_textContentEqualTo:(NSString *)anotherString {
+  NSString *selfTrimed = QJMTrimedLine(self);
+  NSString *otherTrimed = QJMTrimedLine(anotherString);
+  NSCharacterSet *spaceSet = [NSCharacterSet whitespaceCharacterSet];
+  NSArray *selfComs = [[selfTrimed componentsSeparatedByCharactersInSet:spaceSet] qjm_filterWithHandler:^BOOL(id  _Nonnull item) {
+    return ![NSString qjm_isBlank:item];
+  }];
+  NSArray *otherComs = [[otherTrimed componentsSeparatedByCharactersInSet:spaceSet] qjm_filterWithHandler:^BOOL(id  _Nonnull item) {
+    return ![NSString qjm_isBlank:item];
+  }];;
+  NSString *rejoinedSelf = [selfComs componentsJoinedByString:@"+"];
+  NSString *rejoinedOther = [otherComs componentsJoinedByString:@"+"];
+  if (!rejoinedSelf && !rejoinedOther) {
+    return YES;
+  } else {
+    return [rejoinedSelf isEqualToString:rejoinedOther];
+  }
+}
+
++ (BOOL)qjm_isBlank:(NSString *)string {
+  if (!string ||
+      ![string isKindOfClass:[NSString class]] ||
+      !string.length ||
+      !QJMTrimedLine(string).length) {
+    return YES;
+  }
+  return NO;
 }
 
 @end

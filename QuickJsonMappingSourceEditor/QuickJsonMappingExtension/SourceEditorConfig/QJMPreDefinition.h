@@ -10,9 +10,6 @@
 
 #pragma mark - command config
 
-extern NSString *const QJMTemplateIdentifier;
-extern NSString *const QJMTemplateKeyName;
-
 extern NSString *const QJMMantleIdentifier;
 extern NSString *const QJMMantleKeyName;
 

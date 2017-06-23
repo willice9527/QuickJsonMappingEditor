@@ -11,7 +11,6 @@
 #import "QJMCommandHandleProtocol.h"
 #import "QJMMantleCommandHandler.h"
 #import "QJMYYModelCommandHandler.h"
-#import "QJMPropertyTemplateHandler.h"
 #import "QJMClassInfo.h"
 #import "NSString+QJMUitility.h"
 #import "QJMCommandHandleError.h"
@@ -38,7 +37,7 @@
   }
   
   [self.commandHandler commondDidArrivedWithInvocation:invocation];
-  
+  [self clearPreGeneratedCodeInSourceTextBuffer:invocation.buffer];
   NSArray <QJMClassInfo *>*infoArray = [self analyzeSourceTextBuffer:invocation.buffer error:&commandHandleError];
   if (commandHandleError) {
     completionHandler(commandHandleError);
@@ -47,6 +46,31 @@
   
   [self generateMappingCodeWithSourceEditInfoArray:infoArray toBuffer:invocation.buffer error:&commandHandleError];
   completionHandler(commandHandleError);
+}
+
+- (void)clearPreGeneratedCodeInSourceTextBuffer:(XCSourceTextBuffer *)buffer {
+  BOOL enterDeleteArea = NO;
+  for (NSInteger i = buffer.lines.count - 1; i >= 0; i--) {
+    NSString *currentLine = buffer.lines[i];
+    BOOL shouldDeleteCurrentLine = NO;
+    if ([currentLine qjm_textContentEqualTo:[self.commandHandler endMarkStringOfGeneratedCode]]) {
+      shouldDeleteCurrentLine = YES;
+      enterDeleteArea = YES;
+    } else if ([currentLine qjm_textContentEqualTo:[self.commandHandler beginMarkStringOfGeneratedCode]]) {
+      if (enterDeleteArea) {
+        enterDeleteArea = NO;
+      }
+      shouldDeleteCurrentLine = YES;
+    } else {
+      if (enterDeleteArea && [currentLine hasPrefix:Prefix_End]) {
+        enterDeleteArea = NO;
+      }
+      shouldDeleteCurrentLine = enterDeleteArea;
+    }
+    if (shouldDeleteCurrentLine) {
+      [buffer.lines removeObjectAtIndex:i];
+    }
+  }
 }
 
 - (NSArray <QJMClassInfo *>*)analyzeSourceTextBuffer:(XCSourceTextBuffer *)buffer error:(NSError **)error {
@@ -78,7 +102,9 @@
       ///@property (nonatomic, copy, readwrite) NSString *aProperty;
       if (currentinfo) {
         QJMPropertyInfo *propertyInfo = [[QJMPropertyInfo alloc] initWithAttributeMetaStringLine:currentStringLine];
-        [currentinfo.propertyInfos addObject:propertyInfo];
+        if (!propertyInfo.isReadOnly && !propertyInfo.isClassProperty) {
+          [currentinfo.propertyInfos addObject:propertyInfo];
+        }
       }
     } else if ([currentStringLine hasPrefix:Prefix_End]) {
       if (currentinfo) {
@@ -136,8 +162,6 @@
     handlerClass = [QJMMantleCommandHandler class];
   } else if ([QJMYYModelIdentifier isEqualToString:identifier]) {
     handlerClass = [QJMYYModelCommandHandler class];
-  } else if ([QJMTemplateIdentifier isEqualToString:identifier]) {
-    handlerClass = [QJMPropertyTemplateHandler class];
   }
   //jsonmodel /object mapper
   NSParameterAssert(handlerClass);

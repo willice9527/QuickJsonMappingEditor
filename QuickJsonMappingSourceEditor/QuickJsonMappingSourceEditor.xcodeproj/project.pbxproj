@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E4502851EFBA43A00ABC433 /* QJMCommandHandleError.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4502841EFBA43A00ABC433 /* QJMCommandHandleError.m */; };
+		2E5CD29C1EFCF6A300EED8C2 /* NSArray+QJMUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5CD29B1EFCF6A300EED8C2 /* NSArray+QJMUtility.m */; };
 		2EDE90B71EFA7D4600475F70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90B61EFA7D4600475F70 /* AppDelegate.m */; };
 		2EDE90BA1EFA7D4600475F70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90B91EFA7D4600475F70 /* main.m */; };
 		2EDE90BD1EFA7D4600475F70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90BC1EFA7D4600475F70 /* ViewController.m */; };
@@ -19,7 +20,6 @@
 		2EDE90DD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2EDE90CD1EFA7D9600475F70 /* QuickJsonMappingExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2EDE90EC1EFA7DCD00475F70 /* QJMClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90E41EFA7DCD00475F70 /* QJMClassInfo.m */; };
 		2EDE90ED1EFA7DCD00475F70 /* QJMMantleCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90E71EFA7DCD00475F70 /* QJMMantleCommandHandler.m */; };
-		2EDE90EE1EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90E91EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m */; };
 		2EDE90EF1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90EB1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m */; };
 		2EDE90F41EFA7DD400475F70 /* MantlePreference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */; };
 		2EDE90F51EFA7DD400475F70 /* QJMPreDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */; };
@@ -53,6 +53,8 @@
 /* Begin PBXFileReference section */
 		2E4502831EFBA43A00ABC433 /* QJMCommandHandleError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMCommandHandleError.h; sourceTree = "<group>"; };
 		2E4502841EFBA43A00ABC433 /* QJMCommandHandleError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMCommandHandleError.m; sourceTree = "<group>"; };
+		2E5CD29A1EFCF6A300EED8C2 /* NSArray+QJMUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+QJMUtility.h"; sourceTree = "<group>"; };
+		2E5CD29B1EFCF6A300EED8C2 /* NSArray+QJMUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+QJMUtility.m"; sourceTree = "<group>"; };
 		2EDE90B21EFA7D4600475F70 /* QuickJsonMappingSourceEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickJsonMappingSourceEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EDE90B51EFA7D4600475F70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2EDE90B61EFA7D4600475F70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,8 +77,6 @@
 		2EDE90E51EFA7DCD00475F70 /* QJMCommandHandleProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMCommandHandleProtocol.h; sourceTree = "<group>"; };
 		2EDE90E61EFA7DCD00475F70 /* QJMMantleCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMMantleCommandHandler.h; sourceTree = "<group>"; };
 		2EDE90E71EFA7DCD00475F70 /* QJMMantleCommandHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMMantleCommandHandler.m; sourceTree = "<group>"; };
-		2EDE90E81EFA7DCD00475F70 /* QJMPropertyTemplateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMPropertyTemplateHandler.h; sourceTree = "<group>"; };
-		2EDE90E91EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMPropertyTemplateHandler.m; sourceTree = "<group>"; };
 		2EDE90EA1EFA7DCD00475F70 /* QJMYYModelCommandHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QJMYYModelCommandHandler.h; sourceTree = "<group>"; };
 		2EDE90EB1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMYYModelCommandHandler.m; sourceTree = "<group>"; };
 		2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MantlePreference.plist; sourceTree = "<group>"; };
@@ -187,8 +187,6 @@
 				2EDE90E51EFA7DCD00475F70 /* QJMCommandHandleProtocol.h */,
 				2EDE90E61EFA7DCD00475F70 /* QJMMantleCommandHandler.h */,
 				2EDE90E71EFA7DCD00475F70 /* QJMMantleCommandHandler.m */,
-				2EDE90E81EFA7DCD00475F70 /* QJMPropertyTemplateHandler.h */,
-				2EDE90E91EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m */,
 				2EDE90EA1EFA7DCD00475F70 /* QJMYYModelCommandHandler.h */,
 				2EDE90EB1EFA7DCD00475F70 /* QJMYYModelCommandHandler.m */,
 			);
@@ -212,6 +210,8 @@
 			children = (
 				2EDE90F71EFA7DDA00475F70 /* NSString+QJMUitility.h */,
 				2EDE90F81EFA7DDA00475F70 /* NSString+QJMUitility.m */,
+				2E5CD29A1EFCF6A300EED8C2 /* NSArray+QJMUtility.h */,
+				2E5CD29B1EFCF6A300EED8C2 /* NSArray+QJMUtility.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -330,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E5CD29C1EFCF6A300EED8C2 /* NSArray+QJMUtility.m in Sources */,
 				2EDE90D61EFA7D9600475F70 /* SourceEditorExtension.m in Sources */,
 				2EDE90F91EFA7DDA00475F70 /* NSString+QJMUitility.m in Sources */,
 				2EDE90F51EFA7DD400475F70 /* QJMPreDefinition.m in Sources */,
@@ -337,7 +338,6 @@
 				2EDE90D91EFA7D9600475F70 /* SourceEditorCommand.m in Sources */,
 				2E4502851EFBA43A00ABC433 /* QJMCommandHandleError.m in Sources */,
 				2EDE90ED1EFA7DCD00475F70 /* QJMMantleCommandHandler.m in Sources */,
-				2EDE90EE1EFA7DCD00475F70 /* QJMPropertyTemplateHandler.m in Sources */,
 				2EDE90EC1EFA7DCD00475F70 /* QJMClassInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

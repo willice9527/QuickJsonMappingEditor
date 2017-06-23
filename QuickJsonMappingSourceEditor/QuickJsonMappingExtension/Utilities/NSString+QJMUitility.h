@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+//oh no...utility
 @interface NSString (QJMUitility)
 
 - (NSString *)qjm_subStringWithRegular:(NSString *)regular;
@@ -33,5 +34,9 @@
 - (NSString *)qjm_trimdRecursiveWithCharacterInStrings:(NSArray <NSString *>*)characterStrings;
 
 - (BOOL)qjm_isModelDeclareInterfaceLine;
+
+- (BOOL)qjm_textContentEqualTo:(NSString *)anotherString;
+
++ (BOOL)qjm_isBlank:(NSString *)string;
 
 @end

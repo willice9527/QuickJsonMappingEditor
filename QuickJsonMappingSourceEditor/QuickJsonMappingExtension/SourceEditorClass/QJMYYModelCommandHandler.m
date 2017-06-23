@@ -22,4 +22,12 @@
   return nil;
 }
 
+- (NSString *)beginMarkStringOfGeneratedCode {
+  return @"/*\t\tYYModel map method copy begin\t\t\n";
+}
+
+- (NSString *)endMarkStringOfGeneratedCode {
+  return @"\t\tYYModel map method copy end\t\t*/\n";
+}
+
 @end
