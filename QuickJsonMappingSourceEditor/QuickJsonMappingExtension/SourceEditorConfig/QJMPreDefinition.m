@@ -37,6 +37,7 @@ NSString *const QJMYYModelEnablePropertyBlackList = @"blacklist_enable";
 NSString *const QJMYYModelEnablePropertyWhiteList = @"whitelist_enable";
 NSString *const QJMYYModelEnableCopy = @"copy_enable";
 NSString *const QJMYYModelEnableCompare = @"compare_enable";
+NSString *const QJMYYModelEnableTransform = @"transform_enable";
 
 @implementation QJMPreDefinition
 

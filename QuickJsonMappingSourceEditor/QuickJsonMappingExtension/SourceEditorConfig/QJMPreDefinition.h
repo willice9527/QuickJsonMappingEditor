@@ -46,6 +46,7 @@ extern NSString *const QJMYYModelEnablePropertyBlackList;
 extern NSString *const QJMYYModelEnablePropertyWhiteList;
 extern NSString *const QJMYYModelEnableCopy;
 extern NSString *const QJMYYModelEnableCompare;
+extern NSString *const QJMYYModelEnableTransform;
 
 
 @interface QJMPreDefinition : NSObject

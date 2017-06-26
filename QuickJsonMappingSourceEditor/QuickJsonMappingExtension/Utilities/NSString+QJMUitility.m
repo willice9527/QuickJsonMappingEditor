@@ -27,7 +27,7 @@ static inline NSString *QJMTrimedLine(NSString *oriString) {
   return [oriString stringByTrimmingCharactersInSet:QJMSpaceAndNewLineSet];
 }
 
-inline NSString *QJMNewLineWithIndentLevel(NSString *oriString, NSUInteger indentLevel) {
+NSString *QJMNewLineWithIndentLevel(NSString *oriString, NSUInteger indentLevel) {
   NSMutableString *string = [NSMutableString string];
   NSUInteger i = indentLevel;
   while (i > 0) {

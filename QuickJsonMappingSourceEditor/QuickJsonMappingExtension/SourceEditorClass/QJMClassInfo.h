@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *propertyName;
 @property (nonatomic, copy, readonly) NSString *metaLine;
 
+@property (nonatomic, assign, readonly) BOOL isContainer;
+
 - (instancetype)initWithAttributeMetaStringLine:(NSString *)metaString;
 
 @end

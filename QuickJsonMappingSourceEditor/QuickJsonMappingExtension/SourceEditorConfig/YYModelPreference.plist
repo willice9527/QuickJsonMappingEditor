@@ -2,9 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>JsonToModelCustomTransformClass</key>
+	<key>AutoTransformTypes</key>
 	<array>
+		<string>NSString</string>
+		<string>NSNumber</string>
 		<string>NSDate</string>
+		<string>NSValue</string>
+		<string>NSURL</string>
+		<string>SEL</string>
+		<string>Class</string>
+		<string>BOOL</string>
+		<string>int</string>
+		<string>float</string>
+		<string>double</string>
+		<string>NSInteger</string>
+		<string>NSUInteger</string>
+		<string>CGSize</string>
+		<string>CGPoint</string>
+		<string>CGRect</string>
+		<string>CGAffineTransform</string>
+		<string>UIEdgeInsets</string>
+		<string>UIOffset</string>
+		<string>NSTimeInterval</string>
 	</array>
 	<key>SelfDefinedClassRegular</key>
 	<array>

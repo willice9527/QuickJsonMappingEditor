@@ -10,6 +10,7 @@
 #import "QJMClassInfo.h"
 #import "QJMPreDefinition.h"
 #import "NSString+QJMUitility.h"
+#import "NSArray+QJMUtility.h"
 
 @interface QJMMantleCommandHandler ()
 
@@ -80,18 +81,14 @@
   NSArray *keypathMethods = [self keypathForSourceInfo:info];
   NSArray *transformerMethods = [self customerTransformerForSourceInfo:info];
   if (keypathMethods.count) {
-    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
-    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"#pragma mark - mantle keypath map", 0)];
-    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
+    [jsonMapMethods qjm_prefixPragmaMarkWithContent:@"#pragma mark - mantle keypath map"];
     [jsonMapMethods addObjectsFromArray:keypathMethods];
     if (!transformerMethods.count) {
       [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
     }
   }
   if (transformerMethods.count) {
-    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
-    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"#pragma mark - mantle custom class / predefined transformer", 0)];
-    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
+    [jsonMapMethods qjm_prefixPragmaMarkWithContent:@"#pragma mark - mantle custom class / predefined transformer"];
     [jsonMapMethods addObjectsFromArray:transformerMethods];
   }
   if (jsonMapMethods.count) {

@@ -7,6 +7,7 @@
 //
 
 #import "NSArray+QJMUtility.h"
+#import "NSString+QJMUitility.h"
 
 @implementation NSArray (QJMUtility)
 
@@ -21,6 +22,16 @@
     }
   }];
   return [mArray copy];
+}
+
+@end
+
+@implementation NSMutableArray (QJMUtility)
+
+- (void)qjm_prefixPragmaMarkWithContent:(NSString *)markContent {
+  [self addObject:QJMNewLineWithIndentLevel(nil, 0)];
+  [self addObject:QJMNewLineWithIndentLevel(markContent, 0)];
+  [self addObject:QJMNewLineWithIndentLevel(nil, 0)];
 }
 
 @end

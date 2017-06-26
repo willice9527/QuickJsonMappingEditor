@@ -18,4 +18,10 @@ typedef BOOL (^QJMFilterHandler)(id item);
 
 @end
 
+@interface NSMutableArray (QJMUtility)
+
+- (void)qjm_prefixPragmaMarkWithContent:(NSString *)markContent;
+
+@end
+
 NS_ASSUME_NONNULL_END

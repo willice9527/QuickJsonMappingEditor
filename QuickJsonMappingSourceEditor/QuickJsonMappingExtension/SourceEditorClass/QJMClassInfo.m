@@ -13,7 +13,7 @@ static NSString *const QJMPropertyAttributeRegular = @"\\(.*?\\)";//()中间的�
 static NSString *const QJMPropertyTypeWithAttrRegular = @"(?<=\\b\\))\\s*\\w+\\b";//(nonatomic)含有这部分情况下，）后面的第一个单词
 static NSString *const QJMPropertyTypeNoAttrRegular = @"(?<=property)\\s*\\w+\\b";//不含(nonatomic)情况下，property后面的第一个单词
 static NSString *const QJMPropertyNameRegular = @"\\b\\w+\\s*(?=;)";//;号前面的第一个单词
-static NSString *const QJMPropertyInnerTypeRegular = @"(?<=\\<)\\s*\\w+\\b";// < 后面的第一个单词
+static NSString *const QJMPropertyInnerTypeRegular = @"\\b\\w+\\s*(?=\\*\\s*>)";// *> 前面的第一个单词
 static NSString *const QJMPropertyNameForTransformerRegular = @"\\b\\w+(?=JSONTransformer)";// ) JSONTransformer 前面的第一个单词
 
 @interface QJMPropertyInfo ()
@@ -55,6 +55,12 @@ static NSString *const QJMPropertyNameForTransformerRegular = @"\\b\\w+(?=JSONTr
     }
   }
   return self;
+}
+
+- (BOOL)isContainer {
+  return [self.typeString isEqualToString:NSStringFromClass([NSArray class])] ||
+        [self.typeString isEqualToString:NSStringFromClass([NSSet class])] ||
+        [self.typeString isEqualToString:NSStringFromClass([NSDictionary class])];
 }
 
 @end
