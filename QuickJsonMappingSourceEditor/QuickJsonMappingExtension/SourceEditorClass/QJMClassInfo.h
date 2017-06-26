@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAttributeMetaStringLine:(NSString *)metaString;
 
+- (instancetype)initWithAttributeSwiftMetaStringLine:(NSString *)metaString;
+
 @end
 
 @interface QJMClassInfo : NSObject

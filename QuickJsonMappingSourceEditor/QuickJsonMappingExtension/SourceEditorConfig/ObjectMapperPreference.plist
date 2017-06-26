@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SelfDefinedClassRegular</key>
+	<array>
+		<string>^NVM\w+$</string>
+		<string>^EOD\w+$</string>
+		<string>^ESP\w+$</string>
+		<string>^EAC\w+$</string>
+	</array>
+	<key>DefaultTransformerMap</key>
+	<dict>
+		<key>NSData</key>
+		<string>DataTransform</string>
+		<key>NSUUID</key>
+		<string>MTLUUIDValueTransformerName</string>
+		<key>NSDate</key>
+		<string>NVMTimestampToDateTransformerName</string>
+		<key>UIColor</key>
+		<string>NVMHexStringToColorTransformerName</string>
+	</dict>
+</dict>
+</plist>

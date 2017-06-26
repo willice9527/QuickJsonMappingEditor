@@ -57,6 +57,34 @@ static NSString *const QJMPropertyNameForTransformerRegular = @"\\b\\w+(?=JSONTr
   return self;
 }
 
+- (instancetype)initWithAttributeSwiftMetaStringLine:(NSString *)metaString {
+  NSParameterAssert(metaString);
+  self = [super init];
+  if (self) {
+    _isReadOnly = NO;
+    _isClassProperty = NO;
+    _isPrimitiveType = NO;
+    _metaLine = [metaString copy];
+    NSString *attrString = [metaString qjm_subStringWithRegular:QJMPropertyAttributeRegular];
+    if (attrString) {
+      _isReadOnly = [attrString containsString:@"readonly"];
+      _isClassProperty = [attrString containsString:@"class"];
+      _isPrimitiveType = [attrString containsString:@"assign"];
+      _typeString = [metaString qjm_subStringWithRegular:QJMPropertyTypeWithAttrRegular];
+    } else {
+      _typeString = [metaString qjm_subStringWithRegular:QJMPropertyTypeNoAttrRegular];
+    }
+    NSParameterAssert(_typeString);
+    _propertyName = [metaString qjm_subStringWithRegular:QJMPropertyNameRegular];
+    NSParameterAssert(_propertyName);
+    if ([_typeString isEqualToString:NSStringFromClass([NSArray class])] ||
+        [_typeString isEqualToString:NSStringFromClass([NSMutableArray class])]) {
+      _innerTypeString = [metaString qjm_subStringWithRegular:QJMPropertyInnerTypeRegular];
+    }
+  }
+  return self;
+}
+
 - (BOOL)isContainer {
   return [self.typeString isEqualToString:NSStringFromClass([NSArray class])] ||
         [self.typeString isEqualToString:NSStringFromClass([NSSet class])] ||
