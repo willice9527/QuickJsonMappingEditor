@@ -14,9 +14,6 @@ NSString *const QJMMantleKeyName = @"Mantle(OC)";
 NSString *const QJMYYModelIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.yymodel";
 NSString *const QJMYYModelKeyName = @"YYModel(OC)";
 
-NSString *const QJMJsonModelIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.jsonmodel";
-NSString *const QJMJsonModelKeyName = @"JsonModel(OC)";
-
 NSString *const QJMObjectMapperIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.objectmapper";
 NSString *const QJMObjectMapperKeyName = @"ObjectMapper(Swift)";
 
@@ -50,7 +47,7 @@ NSString *const QJMYYModelEnableTransform = @"transform_enable";
 }
 
 + (NSArray *)OCSupportedCommands {
-  return @[ QJMMantleIdentifier, QJMYYModelIdentifier, QJMJsonModelIdentifier ];
+  return @[ QJMMantleIdentifier, QJMYYModelIdentifier ];
 }
 
 @end

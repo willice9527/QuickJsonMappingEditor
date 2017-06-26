@@ -30,15 +30,11 @@
                                     XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
                                     XCSourceEditorCommandIdentifierKey : QJMYYModelIdentifier,};
   
-  NSDictionary *jsonmodelCommand = @{ XCSourceEditorCommandNameKey : QJMJsonModelKeyName,
-                                    XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
-                                    XCSourceEditorCommandIdentifierKey : QJMJsonModelIdentifier,};
-  
   NSDictionary *objectmapperCommand = @{ XCSourceEditorCommandNameKey : QJMObjectMapperKeyName,
                                     XCSourceEditorCommandClassNameKey : @"SourceEditorCommand",
                                     XCSourceEditorCommandIdentifierKey : QJMObjectMapperIdentifier,};
   
-  return @[ mantleCommand, yymodelCommand, jsonmodelCommand, objectmapperCommand ];
+  return @[ mantleCommand, yymodelCommand, objectmapperCommand ];
 }
 
 @end

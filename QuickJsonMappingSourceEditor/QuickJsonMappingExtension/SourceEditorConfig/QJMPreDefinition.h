@@ -16,9 +16,6 @@ extern NSString *const QJMMantleKeyName;
 extern NSString *const QJMYYModelIdentifier;
 extern NSString *const QJMYYModelKeyName;
 
-extern NSString *const QJMJsonModelIdentifier;
-extern NSString *const QJMJsonModelKeyName;
-
 extern NSString *const QJMObjectMapperIdentifier;
 extern NSString *const QJMObjectMapperKeyName;
 
