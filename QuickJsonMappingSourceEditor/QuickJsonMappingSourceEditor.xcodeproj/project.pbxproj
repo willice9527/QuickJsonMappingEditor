@@ -24,6 +24,7 @@
 		2EDE90F41EFA7DD400475F70 /* MantlePreference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EDE90F11EFA7DD400475F70 /* MantlePreference.plist */; };
 		2EDE90F51EFA7DD400475F70 /* QJMPreDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */; };
 		2EDE90F91EFA7DDA00475F70 /* NSString+QJMUitility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EDE90F81EFA7DDA00475F70 /* NSString+QJMUitility.m */; };
+		2EFBE25C1F00AF1A00B1DF3F /* YYModelPreference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EFBE25B1F00AF1A00B1DF3F /* YYModelPreference.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QJMPreDefinition.m; sourceTree = "<group>"; };
 		2EDE90F71EFA7DDA00475F70 /* NSString+QJMUitility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QJMUitility.h"; sourceTree = "<group>"; };
 		2EDE90F81EFA7DDA00475F70 /* NSString+QJMUitility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QJMUitility.m"; sourceTree = "<group>"; };
+		2EFBE25B1F00AF1A00B1DF3F /* YYModelPreference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YYModelPreference.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				2EDE90F31EFA7DD400475F70 /* QJMPreDefinition.m */,
 				2E4502831EFBA43A00ABC433 /* QJMCommandHandleError.h */,
 				2E4502841EFBA43A00ABC433 /* QJMCommandHandleError.m */,
+				2EFBE25B1F00AF1A00B1DF3F /* YYModelPreference.plist */,
 			);
 			path = SourceEditorConfig;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EDE90F41EFA7DD400475F70 /* MantlePreference.plist in Resources */,
+				2EFBE25C1F00AF1A00B1DF3F /* YYModelPreference.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

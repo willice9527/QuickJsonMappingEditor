@@ -9,6 +9,7 @@
 #import "QJMMantleCommandHandler.h"
 #import "QJMClassInfo.h"
 #import "QJMPreDefinition.h"
+#import "NSString+QJMUitility.h"
 
 @interface QJMMantleCommandHandler ()
 
@@ -66,8 +67,7 @@
 - (void)scanWithLine:(NSString *)oriLine purifiedLine:(NSString *)purifiedLine classInfo:(QJMClassInfo *)info {
   if ([purifiedLine localizedCaseInsensitiveContainsString:KeypathCodeingEnable]) {
     self.enableKPCCurrentPage = YES;
-  }
-  if ([purifiedLine localizedCaseInsensitiveContainsString:KeypathCodeingDisable]) {
+  } else if ([purifiedLine localizedCaseInsensitiveContainsString:KeypathCodeingDisable]) {
     self.enableKPCCurrentPage = NO;
   }
 }
@@ -80,18 +80,18 @@
   NSArray *keypathMethods = [self keypathForSourceInfo:info];
   NSArray *transformerMethods = [self customerTransformerForSourceInfo:info];
   if (keypathMethods.count) {
-    [jsonMapMethods addObject:@"\n"];
-    [jsonMapMethods addObject:@"#pragma mark - mantle keypath map\n"];
-    [jsonMapMethods addObject:@"\n"];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"#pragma mark - mantle keypath map", 0)];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
     [jsonMapMethods addObjectsFromArray:keypathMethods];
     if (!transformerMethods.count) {
-      [jsonMapMethods addObject:@"\n"];
+      [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
     }
   }
   if (transformerMethods.count) {
-    [jsonMapMethods addObject:@"\n"];
-    [jsonMapMethods addObject:@"#pragma mark - mantle custom class / predefined transformer\n"];
-    [jsonMapMethods addObject:@"\n"];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"#pragma mark - mantle custom class / predefined transformer", 0)];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
     [jsonMapMethods addObjectsFromArray:transformerMethods];
   }
   if (jsonMapMethods.count) {
@@ -106,26 +106,26 @@
 - (NSArray <NSString *>*)keypathForSourceInfo:(QJMClassInfo *)info {
   NSMutableArray <NSString *>* jsonMapMethods = [NSMutableArray array];
   
-  [jsonMapMethods addObject:@"+ (NSDictionary *)JSONKeyPathsByPropertyKey {\n"];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"+ (NSDictionary *)JSONKeyPathsByPropertyKey {", 0)];
   if (self.enableKPCCurrentPage) {
-    [jsonMapMethods addObject:[NSString stringWithFormat:@"\t%@ *model = nil;\n", info.modelClassName]];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel([NSString stringWithFormat:@"%@ *model = nil;", info.modelClassName], 1)];
   }
-  [jsonMapMethods addObject:@"\treturn @{\n"];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"return @{", 1)];
   
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if (!obj.isReadOnly && !obj.isClassProperty) {
       NSString *methodLine = nil;
       if (self.enableKPCCurrentPage) {
-        methodLine = [NSString stringWithFormat:@"\t\t@keypath(model.%@) : @\"%@\",\n", obj.propertyName, obj.propertyName];
+        methodLine = [NSString stringWithFormat:@"@keypath(model.%@) : @\"%@\",", obj.propertyName, obj.propertyName];
       } else {
-        methodLine = [NSString stringWithFormat:@"\t\t@\"%@\" : @\"%@\",\n", obj.propertyName, obj.propertyName];
+        methodLine = [NSString stringWithFormat:@"@\"%@\" : @\"%@\",", obj.propertyName, obj.propertyName];
       }
-      [jsonMapMethods addObject:methodLine];
+      [jsonMapMethods addObject:QJMNewLineWithIndentLevel(methodLine, 2)];
     }
   }];
   
-  [jsonMapMethods addObject:@"\t};\n"];
-  [jsonMapMethods addObject:@"}\n"];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"};", 1)];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"}", 0)];
   return jsonMapMethods;
 }
 
@@ -154,53 +154,53 @@
 - (NSArray <NSString *>*)keypathPrefixTransformerForProperties:(NSArray <QJMPropertyInfo *>*)propertyArray {
   NSMutableArray <NSString *>* methodLines = [NSMutableArray array];
   [propertyArray enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    NSString *transformerMethed = [NSString stringWithFormat:@"+ (NSValueTransformer *)%@JSONTransformer {\n", obj.propertyName];
-    [methodLines addObject:transformerMethed];
+    NSString *transformerMethed = [NSString stringWithFormat:@"+ (NSValueTransformer *)%@JSONTransformer {", obj.propertyName];
+    [methodLines addObject:QJMNewLineWithIndentLevel(transformerMethed, 0)];
     NSString *transType = obj.innerTypeString ? @"array" : @"dictionary";
     NSString *defaultTransformerName = [self defaultTransformerNameForClass:obj.typeString];
     NSString *returnPart = nil;
     if (defaultTransformerName) {
-      returnPart = [NSString stringWithFormat:@"\treturn [NSValueTransformer valueTransformerForName:%@];\n", defaultTransformerName];
+      returnPart = [NSString stringWithFormat:@"return [NSValueTransformer valueTransformerForName:%@];", defaultTransformerName];
     } else {
-      returnPart = [NSString stringWithFormat:@"\treturn [MTLJSONAdapter %@TransformerWithModelClass:[%@ class]];\n", transType, obj.innerTypeString ?: obj.typeString];
+      returnPart = [NSString stringWithFormat:@"return [MTLJSONAdapter %@TransformerWithModelClass:[%@ class]];", transType, obj.innerTypeString ?: obj.typeString];
     }
-    [methodLines addObject:returnPart];
-    [methodLines addObject:@"}\n"];
-    [methodLines addObject:@"\n"];
+    [methodLines addObject:QJMNewLineWithIndentLevel(returnPart, 1)];
+    [methodLines addObject:QJMNewLineWithIndentLevel(@"}", 0)];
+    [methodLines addObject:QJMNewLineWithIndentLevel(nil, 0)];
   }];
   return methodLines;
 }
 
 - (NSArray <NSString *>*)transformerCollectionMethodForProperties:(NSArray <QJMPropertyInfo *>*)propertyArray {
   NSMutableArray <NSString *>* methodLines = [NSMutableArray array];
-  [methodLines addObject:@"+ (NSValueTransformer *)JSONTransformerForKey:(NSString *)key {\n"];
+  [methodLines addObject:QJMNewLineWithIndentLevel(@"+ (NSValueTransformer *)JSONTransformerForKey:(NSString *)key {", 0)];
   [propertyArray enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    NSString *ifString = [NSString stringWithFormat:@"\t%@if ([key isEqualToString:@\"%@\"]) {\n", idx > 0 ? @"} else " : @"", obj.propertyName];
-    [methodLines addObject:ifString];
+    NSString *ifString = [NSString stringWithFormat:@"%@if ([key isEqualToString:@\"%@\"]) {", idx > 0 ? @"} else " : @"", obj.propertyName];
+    [methodLines addObject:QJMNewLineWithIndentLevel(ifString, 1)];
     NSString *transType = obj.innerTypeString ? @"array" : @"dictionary";
     NSString *defaultTransformerName = [self defaultTransformerNameForClass:obj.typeString];
     NSString *returnPart = nil;
     if (defaultTransformerName) {
-      returnPart = [NSString stringWithFormat:@"\t\treturn [NSValueTransformer valueTransformerForName:%@];\n", defaultTransformerName];
+      returnPart = [NSString stringWithFormat:@"return [NSValueTransformer valueTransformerForName:%@];", defaultTransformerName];
     } else {
-      returnPart = [NSString stringWithFormat:@"\t\treturn [MTLJSONAdapter %@TransformerWithModelClass:[%@ class]];\n", transType, obj.innerTypeString ?: obj.typeString];
+      returnPart = [NSString stringWithFormat:@"return [MTLJSONAdapter %@TransformerWithModelClass:[%@ class]];", transType, obj.innerTypeString ?: obj.typeString];
     }
-    [methodLines addObject:returnPart];
+    [methodLines addObject:QJMNewLineWithIndentLevel(returnPart, 2)];
   }];
-  [methodLines addObject:@"\t} else {\n"];
-  [methodLines addObject:@"\t\treturn nil;\n"];
-  [methodLines addObject:@"\t}\n"];
-  [methodLines addObject:@"}\n"];
-  [methodLines addObject:@"\n"];
+  [methodLines addObject:QJMNewLineWithIndentLevel(@"} else {", 1)];
+  [methodLines addObject:QJMNewLineWithIndentLevel(@"return nil;", 2)];
+  [methodLines addObject:QJMNewLineWithIndentLevel(@"}", 1)];
+  [methodLines addObject:QJMNewLineWithIndentLevel(@"}", 0)];
+  [methodLines addObject:QJMNewLineWithIndentLevel(nil, 0)];
   return methodLines;
 }
 
 - (NSString *)beginMarkStringOfGeneratedCode {
-  return @"/*\t\tmantle map method copy begin\t\t\n";
+  return QJMNewLineWithIndentLevel(@"/*\t\tmantle map method copy begin\t\t", 0);
 }
 
 - (NSString *)endMarkStringOfGeneratedCode {
-  return @"\t\tmantle map method copy end\t\t*/\n";
+  return QJMNewLineWithIndentLevel(@"mantle map method copy end\t\t*/", 2);
 }
 
 @end

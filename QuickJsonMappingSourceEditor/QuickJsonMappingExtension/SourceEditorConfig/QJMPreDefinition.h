@@ -30,7 +30,7 @@ extern NSString *const Prefix_Implementation;
 extern NSString *const Prefix_End;
 extern NSString *const Prefix_MacroDefinition;
 
-#pragma mark - key path coding
+#pragma mark - key path coding mantle
 
 extern NSString *const KeypathCodeingEnable;
 extern NSString *const KeypathCodeingDisable;
@@ -39,6 +39,14 @@ extern NSString *const KeypathCodeingDisable;
 
 extern NSString *const QJMSupportFileTypeOCHeader;
 extern NSString *const QJMSupportFileTypeSwiftSource;
+
+#pragma mark - yymodel setting
+
+extern NSString *const QJMYYModelEnablePropertyBlackList;
+extern NSString *const QJMYYModelEnablePropertyWhiteList;
+extern NSString *const QJMYYModelEnableCopy;
+extern NSString *const QJMYYModelEnableCompare;
+
 
 @interface QJMPreDefinition : NSObject
 

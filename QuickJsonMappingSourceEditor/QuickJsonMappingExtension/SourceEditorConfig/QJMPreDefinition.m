@@ -33,6 +33,11 @@ NSString *const KeypathCodeingDisable = @"Keypath_Coding_Disable";
 NSString *const QJMSupportFileTypeOCHeader = @"public.c-header";
 NSString *const QJMSupportFileTypeSwiftSource = @"public.swift-source";
 
+NSString *const QJMYYModelEnablePropertyBlackList = @"blacklist_enable";
+NSString *const QJMYYModelEnablePropertyWhiteList = @"whitelist_enable";
+NSString *const QJMYYModelEnableCopy = @"copy_enable";
+NSString *const QJMYYModelEnableCompare = @"compare_enable";
+
 @implementation QJMPreDefinition
 
 + (NSArray *)supportedFileTypes {
