@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *QJMNewLineWithIndentLevel(NSString *oriString, NSUInteger indentLevel);
+extern NSString *QJMIndetForStrings(NSString *string, NSUInteger standardLength);
 
 //oh no...utility
 @interface NSString (QJMUitility)

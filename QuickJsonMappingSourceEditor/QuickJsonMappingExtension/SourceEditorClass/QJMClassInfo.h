@@ -29,12 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef BOOL(^QJMUsefullPropertyFilter)(QJMPropertyInfo *proInfo);
+
 @interface QJMClassInfo : NSObject
 
 ///meta info
 @property (nonatomic, copy) NSString *modelClassName;
 @property (nonatomic, assign) NSUInteger interfaceEndLine;
 @property (nonatomic, copy) NSMutableArray <QJMPropertyInfo *>*propertyInfos;
+
+- (NSUInteger)maxLengthOfPropertyNameWithUsefullTargetFilter:(QJMUsefullPropertyFilter)filter;
 
 @end
 

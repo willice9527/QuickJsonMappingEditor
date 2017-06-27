@@ -30,6 +30,16 @@ static NSString *const QJMSwiftFunctionRegular = @"\\bfunc\\b";// 含func
 
 static NSCharacterSet *QJMSpaceAndNewLineSet = nil;
 
+NSString *QJMIndetForStrings(NSString *string, NSUInteger standardLength) {
+  NSMutableString *indentStr = [NSMutableString stringWithString:@" "];
+  NSInteger gap = standardLength - string.length;
+  while (gap > 0) {
+    [indentStr appendString:@" "];
+    gap--;
+  }
+  return [indentStr copy];
+}
+
 static inline NSString *QJMTrimedLine(NSString *oriString) {
   if (!QJMSpaceAndNewLineSet) {
     QJMSpaceAndNewLineSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];

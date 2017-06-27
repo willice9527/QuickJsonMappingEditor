@@ -12,20 +12,6 @@
 #import "NSString+QJMUitility.h"
 #import "NSArray+QJMUtility.h"
 
-static inline NSString *QJMIndetForStrings(NSString *string, NSUInteger standardLength) {
-  NSMutableString *indentStr = [NSMutableString stringWithString:@"\t"];
-  NSInteger gap = standardLength - string.length;
-  while (gap > 0) {
-    [indentStr appendString:@"\t"];
-    if (gap % 2 == 1) {
-      gap -= 3;
-    } else {
-      gap -= 2;
-    }
-  }
-  return [indentStr copy];
-}
-
 @interface QJMObjectMapperCommandHandler ()
 
 @property (nonatomic, copy) NSArray <NSString *>*selfDefinedClassRegulars;
@@ -102,7 +88,9 @@ static inline NSString *QJMIndetForStrings(NSString *string, NSUInteger standard
   [mapMethod qjm_prefixPragmaMarkWithContent:@"// property map"];
   
   [mapMethod addObject:QJMNewLineWithIndentLevel(@"func mapping(map: Map) {", 1)];
-  NSUInteger maxProNameLenth = [[info.propertyInfos valueForKeyPath:@"@max.propertyName.length"] unsignedIntegerValue];
+  NSUInteger maxProNameLenth = [info maxLengthOfPropertyNameWithUsefullTargetFilter:^BOOL(QJMPropertyInfo * _Nonnull proInfo) {
+    return (!proInfo.isReadOnly && !proInfo.isClassProperty);
+  }];
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if (!obj.isReadOnly && !obj.isClassProperty) {
       NSString *mapPart = [NSString stringWithFormat:@"map[\"%@\"]", obj.propertyName];

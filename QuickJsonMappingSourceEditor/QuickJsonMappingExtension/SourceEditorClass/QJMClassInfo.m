@@ -8,6 +8,7 @@
 
 #import "QJMClassInfo.h"
 #import "NSString+QJMUitility.h"
+#import "NSArray+QJMUtility.h"
 
 static NSString *const QJMPropertyAttributeRegular = @"\\(.*?\\)";//()中间的部分
 static NSString *const QJMPropertyTypeWithAttrRegular = @"(?<=\\b\\))\\s*\\w+\\b";//(nonatomic)含有这部分情况下，）后面的第一个单词
@@ -112,6 +113,14 @@ static NSString *const QJMSwiftDictionaryType = @"Dictionary";
     _propertyInfos = [NSMutableArray array];
   }
   return _propertyInfos;
+}
+
+- (NSUInteger)maxLengthOfPropertyNameWithUsefullTargetFilter:(QJMUsefullPropertyFilter)filter {
+  NSArray *filtedArray = [self.propertyInfos qjm_filterWithHandler:filter];
+  if (!filtedArray.count) {
+    return 0;
+  }
+  return [[filtedArray valueForKeyPath:@"@max.propertyName.length"] unsignedIntegerValue];
 }
 
 @end

@@ -110,14 +110,17 @@
     [jsonMapMethods addObject:QJMNewLineWithIndentLevel([NSString stringWithFormat:@"%@ *model = nil;", info.modelClassName], 1)];
   }
   [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"return @{", 1)];
-  
+  NSUInteger maxLength = [info maxLengthOfPropertyNameWithUsefullTargetFilter:^BOOL(QJMPropertyInfo * _Nonnull proInfo) {
+    return (!proInfo.isReadOnly && !proInfo.isClassProperty);
+  }];
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if (!obj.isReadOnly && !obj.isClassProperty) {
       NSString *methodLine = nil;
+      NSString *indent = QJMIndetForStrings(obj.propertyName, maxLength);
       if (self.enableKPCCurrentPage) {
-        methodLine = [NSString stringWithFormat:@"@keypath(model.%@) : @\"%@\",", obj.propertyName, obj.propertyName];
+        methodLine = [NSString stringWithFormat:@"@keypath(model.%@)%@: @\"%@\",", obj.propertyName, indent, obj.propertyName];
       } else {
-        methodLine = [NSString stringWithFormat:@"@\"%@\" : @\"%@\",", obj.propertyName, obj.propertyName];
+        methodLine = [NSString stringWithFormat:@"@\"%@\"%@: @\"%@\",", obj.propertyName, indent, obj.propertyName];
       }
       [jsonMapMethods addObject:QJMNewLineWithIndentLevel(methodLine, 2)];
     }

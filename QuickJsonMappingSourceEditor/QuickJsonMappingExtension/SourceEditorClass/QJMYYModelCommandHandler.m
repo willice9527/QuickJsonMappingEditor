@@ -107,12 +107,15 @@
   NSMutableArray <NSString *>* jsonMapMethods = [NSMutableArray array];
   __block NSUInteger count = 0;
   [jsonMapMethods qjm_prefixPragmaMarkWithContent:@"#pragma mark - custom property map"];
-  
+  NSUInteger maxLength = [info maxLengthOfPropertyNameWithUsefullTargetFilter:^BOOL(QJMPropertyInfo * _Nonnull proInfo) {
+    return (!proInfo.isReadOnly && !proInfo.isClassProperty && !proInfo.isContainer);
+  }];
   [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"+ (NSDictionary *)modelCustomPropertyMapper {", 0)];
   [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"return @{", 1)];
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if (!obj.isReadOnly && !obj.isClassProperty && !obj.isContainer) {
-      NSString * methodLine = [NSString stringWithFormat:@"@\"%@\" : @\"%@\",", obj.propertyName, obj.propertyName];
+      NSString *indent = QJMIndetForStrings(obj.propertyName, maxLength);
+      NSString * methodLine = [NSString stringWithFormat:@"@\"%@\"%@: @\"%@\",", obj.propertyName, indent, obj.propertyName];
       [jsonMapMethods addObject:QJMNewLineWithIndentLevel(methodLine, 2)];
       count++;
     }
@@ -129,12 +132,15 @@
   NSMutableArray <NSString *>* classMap = [NSMutableArray array];
   __block NSUInteger count = 0;
   [classMap qjm_prefixPragmaMarkWithContent:@"#pragma mark - custom container map"];
-  
+  NSUInteger maxLength = [info maxLengthOfPropertyNameWithUsefullTargetFilter:^BOOL(QJMPropertyInfo * _Nonnull proInfo) {
+    return (proInfo.isContainer && proInfo.innerTypeString);
+  }];
   [classMap addObject:QJMNewLineWithIndentLevel(@"+ (NSDictionary *)modelContainerPropertyGenericClass {", 0)];
   [classMap addObject:QJMNewLineWithIndentLevel(@"return @{", 1)];
   [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
     if (obj.isContainer && obj.innerTypeString) {
-      NSString * methodLine = [NSString stringWithFormat:@"@\"%@\" : [%@ class],", obj.propertyName, obj.innerTypeString];
+      NSString *indent = QJMIndetForStrings(obj.propertyName, maxLength);
+      NSString * methodLine = [NSString stringWithFormat:@"@\"%@\"%@: [%@ class],", obj.propertyName, indent, obj.innerTypeString];
       [classMap addObject:QJMNewLineWithIndentLevel(methodLine, 2)];
       count++;
     }
