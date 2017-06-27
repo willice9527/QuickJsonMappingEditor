@@ -11,6 +11,7 @@
 #import "QJMCommandHandleProtocol.h"
 #import "QJMMantleCommandHandler.h"
 #import "QJMYYModelCommandHandler.h"
+#import "QJMObjectMapperCommandHandler.h"
 #import "QJMClassInfo.h"
 #import "NSString+QJMUitility.h"
 #import "QJMCommandHandleError.h"
@@ -93,33 +94,54 @@
       return ;
     }
     NSString *currentStringLine = [obj qjm_purify];
-    if ([currentStringLine hasPrefix:Prefix_Interface] && [currentStringLine qjm_isModelDeclareInterfaceLine]) {
-      QJMClassInfo *info = [QJMClassInfo new];
-      info.modelClassName = [currentStringLine qjm_classNameFromInterfaceLine];
-      [infoArray addObject:info];
-      currentinfo = info;
-    } else if ([currentStringLine hasPrefix:Prefix_Property]) {
-      ///@property (nonatomic, copy, readwrite) NSString *aProperty;
-      if (currentinfo) {
-        QJMPropertyInfo *propertyInfo = [[QJMPropertyInfo alloc] initWithAttributeMetaStringLine:currentStringLine];
-        if (!propertyInfo.isReadOnly && !propertyInfo.isClassProperty) {
-          [currentinfo.propertyInfos addObject:propertyInfo];
+    if (self.isSwiftCode) {
+      if ([currentStringLine qjm_isSwiftClassDeclaration] || [currentStringLine qjm_isSwiftStructDeclaration]) {
+        if ([currentStringLine qjm_isMappable]) {
+          QJMClassInfo *info = [QJMClassInfo new];
+          info.modelClassName = [currentStringLine qjm_classNameFromInterfaceLine];
+          [infoArray addObject:info];
+          currentinfo = info;
+        } else {
+          currentinfo = nil;
         }
-      }
-    } else if ([currentStringLine hasPrefix:Prefix_End]) {
-      if (currentinfo) {
-        currentinfo.interfaceEndLine = idx + 1;
+      } else if ([currentStringLine qjm_isVariableDeclarationLine]) {
+        if (currentinfo) {
+          QJMPropertyInfo *propertyInfo = [[QJMPropertyInfo alloc] initWithAttributeSwiftMetaStringLine:currentStringLine];
+          if (!propertyInfo.isReadOnly && !propertyInfo.isClassProperty) {
+            [currentinfo.propertyInfos addObject:propertyInfo];
+          }
+        }
+      } else if ([currentStringLine qjm_isFunctionDeclarationLine]) {
         currentinfo = nil;
+      }
+    } else {
+      if ([currentStringLine hasPrefix:Prefix_Interface] && [currentStringLine qjm_isModelDeclareInterfaceLine]) {
+        QJMClassInfo *info = [QJMClassInfo new];
+        info.modelClassName = [currentStringLine qjm_classNameFromInterfaceLine];
+        [infoArray addObject:info];
+        currentinfo = info;
+      } else if ([currentStringLine hasPrefix:Prefix_Property]) {
+        ///@property (nonatomic, copy, readwrite) NSString *aProperty;
+        if (currentinfo) {
+          QJMPropertyInfo *propertyInfo = [[QJMPropertyInfo alloc] initWithAttributeMetaStringLine:currentStringLine];
+          if (!propertyInfo.isReadOnly && !propertyInfo.isClassProperty) {
+            [currentinfo.propertyInfos addObject:propertyInfo];
+          }
+        }
+      } else if ([currentStringLine hasPrefix:Prefix_End]) {
+        if (currentinfo) {
+          currentinfo.interfaceEndLine = idx + 1;
+          currentinfo = nil;
+        }
       }
     }
     [self.commandHandler scanWithLine:obj purifiedLine:currentStringLine classInfo:currentinfo];
   }];
-  [infoArray sortUsingComparator:^NSComparisonResult(QJMClassInfo * _Nonnull obj1, QJMClassInfo * _Nonnull obj2) {
-    if (obj1.impIndex <= obj2.impIndex) {
-      return NSOrderedAscending;
-    } else return NSOrderedDescending;
-  }];
   return infoArray;
+}
+
+- (void)analyzeLine:(NSString *)currentStringLine classInfos:(NSMutableArray *)infoArray currentInfo:(QJMClassInfo *)currentinfo  lineIndex:(NSUInteger)idx {
+  
 }
 
 - (void)generateMappingCodeWithSourceEditInfoArray:(NSArray <QJMClassInfo *>*)infoArray
@@ -128,12 +150,16 @@
   NSUInteger newLinesOffset = 0;
   for (QJMClassInfo *info in infoArray) {
     NSArray <NSString *>* jsonMapMethodLines = [self.commandHandler mapMethodForSourceInfo:info];
-    [jsonMapMethodLines enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    
+    [jsonMapMethodLines enumerateObjectsWithOptions:self.isSwiftCode ? 0 :NSEnumerationReverse usingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
       NSUInteger index = info.interfaceEndLine + newLinesOffset;
-      [buffer.lines insertObject:obj atIndex:index];
+      if (self.isSwiftCode) {
+        [buffer.lines addObject:obj];
+      } else {
+        [buffer.lines insertObject:obj atIndex:index];
+      }
     }];
-    info.lineOffset = jsonMapMethodLines.count;
-    newLinesOffset += info.lineOffset;
+    newLinesOffset += jsonMapMethodLines.count;
   }
 }
 
@@ -162,6 +188,8 @@
     handlerClass = [QJMMantleCommandHandler class];
   } else if ([QJMYYModelIdentifier isEqualToString:identifier]) {
     handlerClass = [QJMYYModelCommandHandler class];
+  } else if ([QJMObjectMapperIdentifier isEqualToString:identifier]) {
+    handlerClass = [QJMObjectMapperCommandHandler class];
   }
   //jsonmodel /object mapper
   NSParameterAssert(handlerClass);

@@ -17,12 +17,18 @@ NSString *const QJMYYModelKeyName = @"YYModel(OC)";
 NSString *const QJMObjectMapperIdentifier = @"jinlin.liu.QuickJsonMappingSourceEditor.objectmapper";
 NSString *const QJMObjectMapperKeyName = @"ObjectMapper(Swift)";
 
-///
+///objective-c source
 NSString *const Prefix_Property = @"@property";
 NSString *const Prefix_Interface = @"@interface";
 NSString *const Prefix_Implementation = @"@implementation";
 NSString *const Prefix_End = @"@end";
 NSString *const Prefix_MacroDefinition = @"#define";
+///swift source
+NSString *const Swift_Prefix_Class = @"class";
+NSString *const Swift_Prefix_Struct = @"struct";
+NSString *const Swift_Prefix_Function = @"func";
+NSString *const Swift_Prefix_Variable = @"var";
+
 
 NSString *const KeypathCodeingEnable = @"Keypath_Coding_Enable";
 NSString *const KeypathCodeingDisable = @"Keypath_Coding_Disable";

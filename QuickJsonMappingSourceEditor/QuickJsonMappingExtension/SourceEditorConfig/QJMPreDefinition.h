@@ -27,6 +27,11 @@ extern NSString *const Prefix_Implementation;
 extern NSString *const Prefix_End;
 extern NSString *const Prefix_MacroDefinition;
 
+extern NSString *const Swift_Prefix_Class;
+extern NSString *const Swift_Prefix_Struct;
+extern NSString *const Swift_Prefix_Function;
+extern NSString *const Swift_Prefix_Variable;
+
 #pragma mark - key path coding mantle
 
 extern NSString *const KeypathCodeingEnable;

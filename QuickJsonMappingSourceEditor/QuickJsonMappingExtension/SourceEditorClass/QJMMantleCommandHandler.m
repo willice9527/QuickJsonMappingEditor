@@ -55,7 +55,9 @@
 }
 
 - (NSString *)defaultTransformerNameForClass:(NSString *)className {
-  NSParameterAssert(className);
+  if ([NSString qjm_isBlank:className]) {
+    return nil;
+  }
   return self.defaultTransformerMap[className];
 }
 

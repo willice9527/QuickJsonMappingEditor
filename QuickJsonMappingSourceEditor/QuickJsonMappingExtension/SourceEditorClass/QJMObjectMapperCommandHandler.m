@@ -12,6 +12,20 @@
 #import "NSString+QJMUitility.h"
 #import "NSArray+QJMUtility.h"
 
+static inline NSString *QJMIndetForStrings(NSString *string, NSUInteger standardLength) {
+  NSMutableString *indentStr = [NSMutableString stringWithString:@"\t"];
+  NSInteger gap = standardLength - string.length;
+  while (gap > 0) {
+    [indentStr appendString:@"\t"];
+    if (gap % 2 == 1) {
+      gap -= 3;
+    } else {
+      gap -= 2;
+    }
+  }
+  return [indentStr copy];
+}
+
 @interface QJMObjectMapperCommandHandler ()
 
 @property (nonatomic, copy) NSArray <NSString *>*selfDefinedClassRegulars;
@@ -35,21 +49,10 @@
   return self;
 }
 
-- (BOOL)isSelfDefinedClass:(NSString *)className {
-  if (!className) {
-    return NO;
-  }
-  for (NSString *regular in self.selfDefinedClassRegulars) {
-    NSRange range = [className rangeOfString:regular options:NSRegularExpressionSearch];
-    if (range.location != NSNotFound && range.length == className.length) {
-      return YES;
-    }
-  }
-  return NO;
-}
-
 - (NSString *)defaultTransformerNameForClass:(NSString *)className {
-  NSParameterAssert(className);
+  if ([NSString qjm_isBlank:className]) {
+    return nil;
+  }
   return self.defaultTransformerMap[className];
 }
 
@@ -60,11 +63,7 @@
 }
 
 - (void)scanWithLine:(NSString *)oriLine purifiedLine:(NSString *)purifiedLine classInfo:(QJMClassInfo *)info {
-  if ([purifiedLine localizedCaseInsensitiveContainsString:KeypathCodeingEnable]) {
-    
-  } else if ([purifiedLine localizedCaseInsensitiveContainsString:KeypathCodeingDisable]) {
-    
-  }
+
 }
 
 - (NSArray <NSString *>*)mapMethodForSourceInfo:(QJMClassInfo *)info {
@@ -72,32 +71,64 @@
   if (!info.propertyInfos.count) {
     return jsonMapMethods;
   }
-//  NSArray *keypathMethods = [self keypathForSourceInfo:info];
-//  NSArray *transformerMethods = [self customerTransformerForSourceInfo:info];
-//  if (keypathMethods.count) {
-//    [jsonMapMethods qjm_prefixPragmaMarkWithContent:@"#pragma mark - mantle keypath map"];
-//    [jsonMapMethods addObjectsFromArray:keypathMethods];
-//    if (!transformerMethods.count) {
-//      [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
-//    }
-//  }
-//  if (transformerMethods.count) {
-//    [jsonMapMethods qjm_prefixPragmaMarkWithContent:@"#pragma mark - mantle custom class / predefined transformer"];
-//    [jsonMapMethods addObjectsFromArray:transformerMethods];
-//  }
-//  if (jsonMapMethods.count) {
-//    [jsonMapMethods insertObject:[self beginMarkStringOfGeneratedCode] atIndex:0];
-//    [jsonMapMethods addObject:[self endMarkStringOfGeneratedCode]];
-//  }
+  NSArray *initMethods = [self modelInitMethodForSourceInfo:info];
+  NSArray *mapperMethods = [self mapperMethodForSourceInfo:info];
+  if (initMethods.count) {
+    [jsonMapMethods addObjectsFromArray:initMethods];
+  }
+  if (mapperMethods.count) {
+    [jsonMapMethods addObjectsFromArray:mapperMethods];
+  }
+  if (jsonMapMethods.count) {
+    [jsonMapMethods insertObject:[self beginMarkStringOfGeneratedCode] atIndex:0];
+    [jsonMapMethods addObject:[self endMarkStringOfGeneratedCode]];
+    [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
+  }
   return jsonMapMethods;
 }
 
+- (NSArray <NSString *>*)modelInitMethodForSourceInfo:(QJMClassInfo *)info {
+  NSMutableArray <NSString *>* jsonMapMethods = [NSMutableArray array];
+  [jsonMapMethods qjm_prefixPragmaMarkWithContent:@"// init with map"];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"required init?(map: Map) {", 1)];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(nil, 0)];
+  [jsonMapMethods addObject:QJMNewLineWithIndentLevel(@"};", 1)];
+  return jsonMapMethods;
+}
+
+- (NSArray <NSString *>*)mapperMethodForSourceInfo:(QJMClassInfo *)info {
+  NSMutableArray <NSString *>* mapMethod = [NSMutableArray array];
+  __block NSUInteger count = 0;
+  [mapMethod qjm_prefixPragmaMarkWithContent:@"// property map"];
+  
+  [mapMethod addObject:QJMNewLineWithIndentLevel(@"func mapping(map: Map) {", 1)];
+  NSUInteger maxProNameLenth = [[info.propertyInfos valueForKeyPath:@"@max.propertyName.length"] unsignedIntegerValue];
+  [info.propertyInfos enumerateObjectsUsingBlock:^(QJMPropertyInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    if (!obj.isReadOnly && !obj.isClassProperty) {
+      NSString *mapPart = [NSString stringWithFormat:@"map[\"%@\"]", obj.propertyName];
+      NSString *transformer = [self defaultTransformerNameForClass:obj.isContainer ? obj.innerTypeString : obj.typeString];
+      NSString *indent = QJMIndetForStrings(obj.propertyName, maxProNameLenth);
+      if (transformer) {
+        mapPart = [NSString stringWithFormat:@"(map[\"%@\"], %@())", obj.propertyName, transformer];
+      } 
+      NSString * methodLine = [NSString stringWithFormat:@"%@%@<- %@", obj.propertyName, indent, mapPart];
+      [mapMethod addObject:QJMNewLineWithIndentLevel(methodLine, 2)];
+      count++;
+    }
+  }];
+  [mapMethod addObject:QJMNewLineWithIndentLevel(@"};", 1)];
+  if (count <= 0) {
+    [mapMethod removeAllObjects];
+  }
+  return mapMethod;
+}
+
 - (NSString *)beginMarkStringOfGeneratedCode {
-  return QJMNewLineWithIndentLevel(nil, 0);
+  return QJMNewLineWithIndentLevel(@"/*\t\tObjectMapper map method begin\t\t", 0);
 }
 
 - (NSString *)endMarkStringOfGeneratedCode {
-  return QJMNewLineWithIndentLevel(nil, 2);
+  return QJMNewLineWithIndentLevel(@"ObjectMapper map method end\t\t*/", 2);
 }
 
 @end

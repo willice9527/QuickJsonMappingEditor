@@ -18,6 +18,16 @@ static NSString *const QJMInterfaceClassNamePartRegular = @"(?<=@interface)\\s*\
 static NSString *const QJMImplementationClassNamePartRegular = @"(?<=@implementation)\\s*\\w+\\b";// @implementation 后面的第一个单词
 static NSString *const QJMInterfaceInheritClassRegular = @"(?<=:)\\s*\\w+\\b";// : 后面的第一个单词
 
+static NSString *const QJMSwiftClassRegular = @"\\bclass\\b";// 含class
+static NSString *const QJMSwiftStructRegular = @"\\bstruct\\b";// 含struct
+static NSString *const QJMSwiftMappableCheckRegular = @"\\bMappable\\b";// 含Mappable
+static NSString *const QJMSwiftVarRegular = @"\\bvar\\b";// 含var
+static NSString *const QJMSwiftLetRegular = @"\\blet\\b";// 含let
+static NSString *const QJMSwiftClosureMark = @"->";
+static NSString *const QJMSwiftComputeOrGetterSetterMark = @"{";
+static NSString *const QJMSwiftFunctionRegular = @"\\bfunc\\b";// 含func
+
+
 static NSCharacterSet *QJMSpaceAndNewLineSet = nil;
 
 static inline NSString *QJMTrimedLine(NSString *oriString) {
@@ -157,5 +167,30 @@ NSString *QJMNewLineWithIndentLevel(NSString *oriString, NSUInteger indentLevel)
   }
   return NO;
 }
+
+- (BOOL)qjm_isSwiftClassDeclaration {
+  return [self qjm_subStringWithRegular:QJMSwiftClassRegular].length > 0 &&
+        [self qjm_subStringWithRegular:QJMSwiftVarRegular].length <= 0 &&
+        [self qjm_subStringWithRegular:QJMSwiftLetRegular].length <= 0;
+}
+
+- (BOOL)qjm_isSwiftStructDeclaration {
+  return [self qjm_subStringWithRegular:QJMSwiftStructRegular].length > 0;
+}
+
+- (BOOL)qjm_isMappable {
+  return [self qjm_subStringWithRegular:QJMSwiftMappableCheckRegular].length > 0;
+}
+
+- (BOOL)qjm_isVariableDeclarationLine {
+  return [self qjm_subStringWithRegular:QJMSwiftVarRegular].length > 0 &&
+        [self rangeOfString:QJMSwiftClosureMark].location == NSNotFound &&
+        [self rangeOfString:QJMSwiftComputeOrGetterSetterMark].location == NSNotFound;
+}
+
+- (BOOL)qjm_isFunctionDeclarationLine {
+  return [self qjm_subStringWithRegular:QJMSwiftFunctionRegular].length > 0;
+}
+
 
 @end

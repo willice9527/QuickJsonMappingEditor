@@ -36,10 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSUInteger interfaceEndLine;
 @property (nonatomic, copy) NSMutableArray <QJMPropertyInfo *>*propertyInfos;
 
-///reposition entry point
-@property (nonatomic, assign) NSUInteger lineOffset;
-@property (nonatomic, assign) NSUInteger impIndex;
-
 @end
 
 NS_ASSUME_NONNULL_END

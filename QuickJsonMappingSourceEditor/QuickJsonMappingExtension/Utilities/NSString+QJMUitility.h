@@ -41,4 +41,14 @@ extern NSString *QJMNewLineWithIndentLevel(NSString *oriString, NSUInteger inden
 
 + (BOOL)qjm_isBlank:(NSString *)string;
 
+- (BOOL)qjm_isSwiftClassDeclaration;
+
+- (BOOL)qjm_isSwiftStructDeclaration;
+
+- (BOOL)qjm_isMappable;
+
+- (BOOL)qjm_isVariableDeclarationLine;
+
+- (BOOL)qjm_isFunctionDeclarationLine;
+
 @end
