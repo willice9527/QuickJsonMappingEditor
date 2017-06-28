@@ -29,8 +29,8 @@
 ```
 ![MantleDemo~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/MantleDemo.gif)
 
-###### Mantle相关自定义设置（可以在`MantlePreference.plist`中自行修改）
-=============
+**Mantle相关自定义设置（可以在`MantlePreference.plist`中自行修改）**
+
 参数名 |  含义
 ------|------
 EXTKeyPathCoding | 在生成的`JSONKeyPathsByPropertyKey`这个方法中，是否使用`@keypath`宏
