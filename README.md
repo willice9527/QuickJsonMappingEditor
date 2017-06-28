@@ -28,6 +28,8 @@
 
 以上请注意，留意源码编辑区顶部的报错信息
 
+![setup~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/Setup.gif)
+
 
 系统要求
 ==============
