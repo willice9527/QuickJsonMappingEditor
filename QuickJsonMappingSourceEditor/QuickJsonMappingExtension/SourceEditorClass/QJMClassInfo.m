@@ -59,8 +59,7 @@ static NSString *const QJMSwiftDictionaryType = @"Dictionary";
     NSParameterAssert(_typeString);
     _propertyName = [metaString qjm_subStringWithRegular:QJMPropertyNameRegular];
     NSParameterAssert(_propertyName);
-    if ([_typeString isEqualToString:NSStringFromClass([NSArray class])] ||
-        [_typeString isEqualToString:NSStringFromClass([NSMutableArray class])]) {
+    if ([self isContainerType:_typeString]) {
       _innerTypeString = [metaString qjm_subStringWithRegular:QJMPropertyInnerTypeRegular];
     }
   }
@@ -96,12 +95,16 @@ static NSString *const QJMSwiftDictionaryType = @"Dictionary";
   return self;
 }
 
+- (BOOL)isContainerType:(NSString *)typeString {
+  return [typeString isEqualToString:NSStringFromClass([NSArray class])] ||
+        [typeString isEqualToString:NSStringFromClass([NSSet class])] ||
+        [typeString isEqualToString:NSStringFromClass([NSDictionary class])] ||
+        [typeString isEqualToString:QJMSwiftArrayType] ||
+        [typeString isEqualToString:QJMSwiftDictionaryType];
+}
+
 - (BOOL)isContainer {
-  return [self.typeString isEqualToString:NSStringFromClass([NSArray class])] ||
-        [self.typeString isEqualToString:NSStringFromClass([NSSet class])] ||
-        [self.typeString isEqualToString:NSStringFromClass([NSDictionary class])] ||
-        [self.typeString isEqualToString:QJMSwiftArrayType] ||
-        [self.typeString isEqualToString:QJMSwiftDictionaryType];
+  return [self isContainerType:self.typeString];
 }
 
 @end

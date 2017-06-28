@@ -1,7 +1,7 @@
 # QuickJsonMappingSourceEditor
 一款Xcode source editor，用于减轻使用Mantle/YYModel/ObjectMapper 此类ORM库时手写映射关系的负担
 
-### Mantle
+## Mantle
 
 这里是一段用于演示的OC Model代码
 ```objc
@@ -41,6 +41,8 @@ DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的�
 比如，如上的例子中，添加一个`^QJM\w+$`用来识别自定义类.添加`NSUUID`类型默认使用`MTLUUIDValueTransformerName`这个名称标识的`transformer`
 
 `QJMOCSubModel`均为基本类型，其中`tips`为一个数组，但由于内部元素均为`NSString`，故无需自定义`transformer`
+
+*如果在针对当前文件中的`model`，对使用`@keypath`宏有特别设置，可以在当前文件中定义宏`Keypath_Coding_Enable`来启用或 `Keypath_Coding_Disable`来禁用*
 
 **重点说明OCModel中各属性的情况**
 
@@ -112,13 +114,102 @@ DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的�
 
 直接将生成的内容复制进.m文件即可
 	
-### YYModel
+## YYModel
+
+用于演示的OC Model代码参照`mantle`部分
 ```objc
 
 ```	
 ![YYModelDemo~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/YYModelDemo.gif)
 
-### Swift
+**YYModel相关自定义设置（可以在`YYModelPreference.plist`中自行修改）**
+
+参数名 |  含义
+------|------
+SelfDefinedClassRegular | 一组正则表达式，如何识别自定义类
+AutoTransformTypes | `YYModel`中自动支持的类型转换，只添加了最常用的部分
+
+这里，只有当一个属性既不是自定义类型，也不包含在自动转换的类型列表中时，才会添加自行`transform`相关方法
+
+比如，如上的例子中，只有`uid`这个属性需要自行`transform`
+
+**`YYModel`中含有一些不常用的设置（仅针对特定文件）**
+
+参数名 |  含义
+------|------
+blacklist_enable | 生成黑名单空列表
+whitelist_enable | 生成白名单空列表，优先级高于黑名单
+copy_enable | 生成NSCopy相关方法
+compare_enable | 生成NSCompare相关方法
+transform_enable | 生成自行`transform`相关方法
+
+
+*开启方式为在文件头部定义上述列表中的宏*
+
+**最终生成的内容如下**
+
+```objc
+
+/*		YYModel map method copy begin		
+#pragma mark - custom property map
+
++ (NSDictionary *)modelCustomPropertyMapper {
+	return @{
+		@"title"    : @"title",
+		@"uid"      : @"uid",
+		@"count"    : @"count",
+		@"subModel" : @"subModel",
+	};
+}
+
+#pragma mark - custom container map
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+	return @{
+		@"subModels"      : [QJMOCSubModel class],
+		@"cacheSubModels" : [QJMOCSubModel class],
+	};
+}
+
+#pragma mark - custome transform
+
+- (NSDictionary *)modelCustomWillTransformFromDictionary:(NSDictionary *)dic {
+	//-- custom transform for: uid --
+	return dic;
+}
+
+- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
+	//-- custom transform for: uid --
+	return YES;
+}
+
+- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
+	//-- custom transform for: uid --
+	return YES;
+}
+
+#pragma mark - NSCoder
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+	[self yy_modelEncodeWithCoder:aCoder];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	self = [super init];
+	return [self yy_modelInitWithCoder:aDecoder];
+}
+
+#pragma mark - description
+
+- (NSString *)description {
+	return [self yy_modelDescription];
+}
+		YYModel map method copy end		*/
+
+```
+
+
+## Swift
 ```swift
 
 ```	

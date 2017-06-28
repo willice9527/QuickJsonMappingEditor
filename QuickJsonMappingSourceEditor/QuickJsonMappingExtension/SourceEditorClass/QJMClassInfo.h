@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL isClassProperty;
 @property (nonatomic, assign, readonly) BOOL isReadOnly;
 @property (nonatomic, copy, readonly) NSString *typeString;
-@property (nonatomic, copy, readonly) NSString *innerTypeString;//container only{Array,set}
+@property (nonatomic, copy, readonly) NSString *innerTypeString;
 @property (nonatomic, copy, readonly) NSString *propertyName;
 @property (nonatomic, copy, readonly) NSString *metaLine;
 
