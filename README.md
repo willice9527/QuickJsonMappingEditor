@@ -1,5 +1,5 @@
 # QuickJsonMappingSourceEditor
-一款Xcode source editor，用于减轻使用Mantle/YYModel/ObjectMapper 此类ORM库时手写映射关系的负担
+> 一款Xcode source editor，用于减轻使用Mantle/YYModel/ObjectMapper 此类ORM库时手写映射关系的负担
 
 ## Mantle
 
@@ -38,11 +38,11 @@ KeyPathPrefixTransformer | 在为某个属性生成自定义`transformer`时，�
 SelfDefinedClassRegular | 一组正则表达式，如何识别自定义类
 DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的对应关系
 
-比如，如上的例子中，添加一个`^QJM\w+$`用来识别自定义类.添加`NSUUID`类型默认使用`MTLUUIDValueTransformerName`这个名称标识的`transformer`
+> 比如，如上的例子中，添加一个`^QJM\w+$`用来识别自定义类.添加`NSUUID`类型默认使用`MTLUUIDValueTransformerName`这个名称标识的`transformer`
 
-`QJMOCSubModel`均为基本类型，其中`tips`为一个数组，但由于内部元素均为`NSString`，故无需自定义`transformer`
+> `QJMOCSubModel`均为基本类型，其中`tips`为一个数组，但由于内部元素均为`NSString`，故无需自定义`transformer`
 
-*如果在针对当前文件中的`model`，对使用`@keypath`宏有特别设置，可以在当前文件中定义宏`Keypath_Coding_Enable`来启用或 `Keypath_Coding_Disable`来禁用*
+> *如果在针对当前文件中的`model`，对使用`@keypath`宏有特别设置，可以在当前文件中定义宏`Keypath_Coding_Enable`来启用或 `Keypath_Coding_Disable`来禁用*
 
 **重点说明OCModel中各属性的情况**
 
@@ -116,7 +116,8 @@ DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的�
 	
 ## YYModel
 
-用于演示的OC Model代码参照`mantle`部分
+> 用于演示的OC Model代码参照`mantle`部分
+
 	
 ![YYModelDemo~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/YYModelDemo.gif)
 
@@ -127,9 +128,9 @@ DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的�
 SelfDefinedClassRegular | 一组正则表达式，如何识别自定义类
 AutoTransformTypes | `YYModel`中自动支持的类型转换，只添加了最常用的部分
 
-这里，只有当一个属性既不是自定义类型，也不包含在自动转换的类型列表中时，才会添加自行`transform`相关方法
+> 这里，只有当一个属性既不是自定义类型，也不包含在自动转换的类型列表中时，才会添加自行`transform`相关方法
 
-比如，如上的例子中，只有`uid`这个属性需要自行`transform`
+> 比如，如上的例子中，只有`uid`这个属性需要自行`transform`
 
 **`YYModel`中含有一些不常用的设置（仅针对特定文件）**
 
@@ -300,11 +301,11 @@ DefaultTransformerMap | `ObjectMapperDemo`中自带的`transformer`（目前只�
 ==============
 直接下载本工程，编译运行，即可在Xcode顶部的`Editor`菜单下最下面看到`QuickJsonMappingSourceEditor`，根据需要选择对应功能即可。
 
-重复点击，最新生成的内容会覆盖之前产生的内容。
+> 重复点击，最新生成的内容会覆盖之前产生的内容。
 
-**`objective-c`仅可在.h文件中执行操作**
+1. **`objective-c`仅可在.h文件中执行操作**
 
-**个菜单命令都表明了适用的源文件类型**
+2. **个菜单命令都表明了适用的源文件类型**
 
 以上请注意，留意源码编辑区顶部的报错信息
 
