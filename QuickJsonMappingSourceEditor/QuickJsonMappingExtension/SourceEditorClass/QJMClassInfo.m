@@ -77,7 +77,7 @@ static NSString *const QJMSwiftDictionaryType = @"Dictionary";
     _metaLine = [metaString copy];
     NSString *semicolonFrontPart = [metaString qjm_subStringWithRegular:QJMSwiftPropertySemicolonFrontRegular];
     NSParameterAssert(semicolonFrontPart);
-    _isClassProperty = [semicolonFrontPart containsString:@"class"];
+    _isClassProperty = [semicolonFrontPart containsString:@"static"];
     _propertyName = [metaString qjm_subStringWithRegular:QJMSwiftPropertyNameRegular];
     NSParameterAssert(_propertyName);
     NSString *containerDes = [metaString qjm_subStringWithRegular:QJMSwiftPropertyTypeRegular];

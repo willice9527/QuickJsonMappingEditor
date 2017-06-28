@@ -4,14 +4,14 @@
 <dict>
 	<key>DefaultTransformerMap</key>
 	<dict>
-		<key>NSData</key>
+		<key>Data</key>
 		<string>DataTransform</string>
-		<key>NSUUID</key>
-		<string>MTLUUIDValueTransformerName</string>
-		<key>NSDate</key>
-		<string>NVMTimestampToDateTransformerName</string>
+		<key>URL</key>
+		<string>URLTransform</string>
+		<key>Date</key>
+		<string>DateTransform</string>
 		<key>UIColor</key>
-		<string>NVMHexStringToColorTransformerName</string>
+		<string>HexColorTransform</string>
 	</dict>
 </dict>
 </plist>

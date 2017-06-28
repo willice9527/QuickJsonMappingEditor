@@ -12,6 +12,7 @@
 		<string>^EOD\w+$</string>
 		<string>^ESP\w+$</string>
 		<string>^EAC\w+$</string>
+		<string>^QJM\w+$</string>
 	</array>
 	<key>DefaultTransformerMap</key>
 	<dict>
