@@ -29,8 +29,7 @@
 ```
 ![MantleDemo~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/MantleDemo.gif)
 
-**Mantle相关自定义设置（可以在`MantlePreference.plist`中自行修改）**
-
+###### Mantle相关自定义设置（可以在`MantlePreference.plist`中自行修改）
 =============
 参数名 |  含义
 ------|------
@@ -76,8 +75,6 @@ DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的�
 8. `cacheSubModels`dictionary,貌似`mantle`中没有处理
 
 **最终生成的内容如下**
-
-=============
 
 ```objc
 /*		mantle map method copy begin		
