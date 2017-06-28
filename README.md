@@ -117,9 +117,7 @@ DefaultTransformerMap | 预先设置好的类型与自定义`transformer`名的�
 ## YYModel
 
 用于演示的OC Model代码参照`mantle`部分
-```objc
-
-```	
+	
 ![YYModelDemo~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/YYModelDemo.gif)
 
 **YYModel相关自定义设置（可以在`YYModelPreference.plist`中自行修改）**
@@ -209,11 +207,94 @@ transform_enable | 生成自行`transform`相关方法
 ```
 
 
-## Swift
+## ObjectMapper
+
+首先贴上一段用于演示的`swift`源码
 ```swift
+class SubModel: Mappable {
+  var name: String?
+  var age: Int?
+  var tips: [String] = []
+}
+
+class Model: Mappable {
+  static var classTitle: String?
+  var readTitle: String {
+    return "hehe"
+  }
+  var data: Data
+  var url: URL
+  var date: Date
+  var color: UIColor
+  var title: String?
+  var count: Int?
+  var subModels: [SubModel] = []
+  var cacheSubModels: [String : SubModel] = [:]
+}
 
 ```	
 ![ObjectMapperDemo~](https://github.com/willice9527/QuickJsonMappingEditor/blob/master/ObjectMapperDemo.gif)
+
+** *首先要声明一点，对于`swift`的支持还相当脆弱，主要是因为`swift`不同于OC那样把头文件独立出来* **
+
+**ObjectMapper相关自定义设置（可以在`ObjectMapperPreference.plist`中自行修改）**
+
+参数名 |  含义
+------|------
+DefaultTransformerMap | `ObjectMapperDemo`中自带的`transformer`（目前只添加了有限的几个）
+
+如上的例子中`Data,URL,Date,UIColor`会使用`transformer`
+
+最终生成的内容如下
+
+```objc
+
+/*		ObjectMapper map method begin		
+
+// init with map
+
+	required init?(map: Map) {
+
+	};
+
+// property map
+
+	func mapping(map: Map) {
+		name <- map["name"]
+		age  <- map["age"]
+		tips <- map["tips"]
+	};
+		ObjectMapper map method end		*/
+
+/*		ObjectMapper map method begin		
+
+// init with map
+
+	required init?(map: Map) {
+
+	};
+
+// property map
+
+	func mapping(map: Map) {
+		data           <- (map["data"], DataTransform())
+		url            <- (map["url"], URLTransform())
+		date           <- (map["date"], DateTransform())
+		color          <- (map["color"], HexColorTransform())
+		title          <- map["title"]
+		count          <- map["count"]
+		subModels      <- map["subModels"]
+		cacheSubModels <- map["cacheSubModels"]
+	};
+		ObjectMapper map method end		*/
+
+```
+
+** ObjectMapper中使用要注意如下几点 **
+
+1.  `Mappable`协议最好放在：之后,以免遵守的协议过多，导致换行，`Mappable`仅在同一行中可以识别
+2.  对于`compute property` 和 自定义`getter setter` 及带有`willset didset` 方法的`property`，属性声明中的方法中的属性会被误识别，还没有精确处理
+3.  目前所有生成的内容都插入到文件底部
 
 使用方法
 ==============
